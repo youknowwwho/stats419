@@ -1,23 +1,199 @@
 ---
-title: "3 Datasets Assignment Revisited Notebook"
-author: "Connor StarrHurst"
-
+title: "Week 3 Datasets Assignment Revisited"
 output:
   html_document:
     df_print: paged
+    toc: yes
+    toc_depth: 4
+    toc_float: yes  #make the toc float on the left side
+    fig_caption: yes
+    number_sections: yes
+  pdf_document:
+    toc: yes  #table of contents
+    extra_dependencies: ["float"]
 ---
-#sandbox to test
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.pos = "H", out.extra = "")
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+```{r common include, message=FALSE, warning=FALSE}
+library(devtools); #for source_url()
+library(tibble) #for add_column() under 4. PERSONALITY DATA
+library(lubridate) #for year() and week() under 4. PERSONALITY DATA
+my.source = 'local';
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+local.path = "C:/Users/Connor/.ssh/stats419/";
+local.data.path = "";
+source( paste0(local.path,"Functions/libraries.R") );
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+# Rotate Matrix
+
+Create the "rotate matrix" functions as described in lectures. Apply to the example "myMatrix".
+```{r 1.rotate matrix, message=FALSE, warning=FALSE}
+source( paste0(local.path,"Week 3/Week 3 Functions/functions rotate matrix.R") );
+
+myMatrix = matrix( c(
+  1, 0, 2,
+  0, 3, 0,
+  4, 0, 5
+), nrow=3, byrow=T);
+
+yourMatrix = matrix( c(
+  1, 2, 3,
+  4, 5, 6,
+  7, 8, 9
+), nrow=3, byrow=T);
+
+myMatrix
+transposeMatrix(myMatrix);
+rotateMatrix90(myMatrix);
+rotateMatrix180(myMatrix);
+rotateMatrix270(myMatrix);
+multiply3x3Matrix(myMatrix, yourMatrix);
+```
+
+# IRIS Graphic
+
+Recreate the graphic for the IRIS Data Set using R.  Same titles, same scales, same colors.  See: https://en.wikipedia.org/wiki/Iris_flower_data_set#/media/File:Iris_dataset_scatterplot.svg
+```{r 2.IRIS, warning=FALSE, fig.cap="IRIS Data", fig.align='center'}
+pairs(iris[1:4], #use IRIS list data to create a matrix of scatterplots
+      main = "Iris Data (red=setosa,green=versicolor,blue=virginica)", #title
+      pch = 21, #set plot characters to be filled circles
+      bg = c("red", "green3", "blue")[unclass(iris$Species)]); #set the background/fill color of the plot characters for the unclassed list of species (1=red, 2=green3, 3=blue)
+```
+
+# IRIS Sentences
+
+Write 2-3 sentences concisely defining the IRIS Data Set.  Maybe search KAGGLE for a nice template. Be certain the final write up are your own sentences (make certain you modify what you find, make it your own, but also cite where you got your ideas from).
+
+One of the first things I noticed when looking at the data is that the virginica species is overall a larger plant. It has the largest petals (in length and width) and longest sepals overall. Conversely, the setosa species has the smallest petals (in length and width) with the shortest sepal length.
+
+
+# Personality Data
+
+Import "personality-raw.txt" into R.  Remove the V00 column.  Create two new columns from the current column "date_test":  year and week. Stack Overflow may help:  https://stackoverflow.com/questions/22439540/how-to-get-week-numbers-from-dates ... Sort the new data frame by YEAR, WEEK so the newest tests are first ... The newest tests (e.g., 2020 or 2019) are at the top of the data frame.  Then remove duplicates using the unique function based on the column "md5_email".  Save the data frame in the same "pipe-delimited format" ( | is a pipe ) with the headers.  You will keep the new data frame as "personality-clean.txt" for future work (you will not upload it at this time). In the homework, for this task, report how many records your raw dataset had and how many records your clean dataset has.
+```{r 4.personality}
+data4 = read.delim("C:\\Users\\Connor\\Documents\\1) WSU 2018-\\Fall 2020\\Stat 419\\Week 2\\personality-raw.txt", header = T, sep = "|"); #import data
+data4 = data4[c(1:2,4:63)]; #remove "V00" column
+data4 = add_column(data4, year = NA, .after = 2); #add a year column
+data4 = add_column(data4, week = NA, .after = 3); #add a week column
+
+for(i in 1:nrow(data4))
+{
+  date = data4[i,2];
+  date = strptime(date, format = "%m/%d/%Y %H:%M"); #convert date string to POSIXlt/POSIXt
+  data4[i,3] = year(date); #get the year and put it in the year column
+  data4[i,4] = week(date); #get the week and put it in the week column
+}
+
+data4 = data4[order(-data4$year, -data4$week),]; #sort the data descending by year first, then week
+#dab = unique(data4, incomparables = F, MARGIN = 1, fromLast = F) #793 & 794 are duplicates (ece0c3bd125984b3528887c1b17a83b3)
+#dab = data4 %>% distinct(data4$md5_email, .keep_all = T); 
+data4 = data4[!duplicated(data4$md5_email),]; #remove duplicates
+write.table(data4, "personality-clean.txt", sep = "|", row.names = T); #save a cleaned version of the data with the headers
+
+data4;
+```
+
+The raw dataset had 838 records and my clean dataset has 678 records.
+
+
+# Do, Variance, and Z-scores
+
+Write functions for doSummary and sampleVariance and doMode ... test these functions in your homework on the "monte.shaffer@gmail.com" record from the clean dataset.  Report your findings.  For this "monte.shaffer@gmail.com" record, also create z-scores.  Plot(x,y) where x is the raw scores for "monte.shaffer@gmail.com" and y is the z-scores from those raw scores.  Include the plot in your assignment, and write 2 sentences describing what pattern you are seeing and why this pattern is present.
+
+### Do Functions
+```{r 5.do}
+source( paste0(local.path,"Week 3/Week 3 Functions/functions do, variance, & z-scores.R") );
+
+record = data4[1,]; #get the monte.shaffer@gmail.com record (b62c73cdaf59e0a13de495b84030734e 4/6/2020 12:57 2020  14 3.4 ...)
+
+doSummary(record);
+doMode(record);
+```
+### Variance Functions
+```{r variance}
+doSampleVariance(record, 1); #return sum, sumSquared, and variance
+doSampleVariance(record, "naive"); #return sum, sumSquared, and variance
+```
+### Z-Scores and Plot
+```{r z-scores}
+
+```
+
+Sentences.
+
+
+
+
+# Will vs Denzel
+```{r mychunk-imdb-include,message=FALSE}
+source( paste0(local.path,"Functions/functions-imdb.R") );
+```
+
+### Will Smith
+```{r chunk-will, fig.cap=c( "Will Smith Pairs Scatterplot: IMDB(2020)","Will Smith Boxplot raw millions: IMDB(2020)" ), fig.dim=c(5,5), fig.align='center'}
+nmid = "nm0000226";
+will = grabFilmsForPerson(nmid);
+
+#pairs(will$movies.50[c(1,6,8:10)]);
+plot(will$movies.50[,c(1,6,8:10)]);
+boxplot(will$movies.50$millions);
+widx = which.max(will$movies.50$millions);
+
+will$movies.50[widx,];
+summary(will$movies.50$year);  # bad boys for life ... did data change?
+```
+
+### Denzel Washington
+```{r chunk-denzel}
+denzel = grabFilmsForPerson(nmid);
+ 	plot(denzel$movies.50[,c(1,6,8:10)]);
+  	boxplot(denzel$movies.50$millions);
+		didx = which.max(denzel$movies.50$millions);
+	denzel$movies.50[didx,];
+		summary(denzel$movies.50$year);
+```
+
+### BoxPlot of Top 50 movies using raw dollars
+
+```{r chunk-boxplot-raw}
+	par(mfrow=c(1,2));
+	boxplot(will$movies.50$millions, main=will$name, ylim=c(0,360), ylab="Raw Millions" );
+	boxplot(denzel$movies.50$millions, main=denzel$name, ylim=c(0,360), ylab="Raw Millions" );
+	
+	par(mfrow=c(1,1));
+	
+	# https://www.in2013dollars.com/us/inflation/2000?endYear=1982&amount=100
+	# create variable $millions.2000 to convert all money to 2000 dollars ... based on year 
+```
+
+
+# Side-by-Side Comparisons
+
+Build side-by-side box plots on several of the variables (including #6) to compare the two movie stars.  After each box plot, write 2+ sentence describing what you are seeing, and what conclusions you can logically make.  You will need to review what the box plot is showing with the box portion, the divider in the box, and the whiskers.
+```{r}
+
+```
+
+### Adjusted Dollars (2000)
+```{r}
+
+```
+
+### Totoal Votes (Divide by 1,000,000)
+```{r}
+
+```
+### Average Ratings (Scale from 1-10)
+```{r}
+
+```
+### Year & Minutes
+### Metacritic (NA Values)
+
+```{r}
+print("") #removes "unexpected end of document error"
+```

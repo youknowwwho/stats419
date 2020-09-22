@@ -1,0 +1,64 @@
+---
+title: "3 Datasets Assignment Example"
+author: "Connor StarrHurst"
+emil: "connor.starrhurst@wsu.edu"
+WSU ID: "11596221"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    df_print: paged
+  pdf_document:
+    citation_package: natbib
+    latex_engine: pdflatex
+    template: ./../Latex Templates/homework.tex
+
+course: "STATS 419"
+instructor: "Monte J. Shaffer"
+
+fig-caption: true
+number_sections: true
+---
+#writeup/final product for submission. Will be made public and re-producable to the world
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r,mychunk-1,message=FALSE}
+library(devtools); #required for source_url()
+my.source = 'github';
+
+github.path = "https://raw.githubusercontent.com/youknowwwho/stats419/";
+source_url( paste0(github.path,"master/Functions/libraries.R") );
+source_url( paste0(github.path,"master/Functions/functions-imdb.R") );
+
+# source_url("https://raw.githubusercontent.com/youknowwwho/stats419/master/Functions/libraries.R");
+# source_url("https://raw.githubusercontent.com/youknowwwho/stats419/master/Functions/functions-imdb.R");
+```
+
+\newpage
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, fig.cap="test cap"}
+plot(pressure)
+```
+
+
+Malcom Gladwell\footnote{Comb your hair man!} talks about outliers \citep{Gladwell:2008}.
+
+\citet{Shaffer:2011} has boots.
+
+We would like to thank \citet{Rmarkdown:Latex:Templates} for the hints to create our own template.

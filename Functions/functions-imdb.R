@@ -224,8 +224,6 @@ grabFilmsForPerson = function(nmid)
   result$movies.50 = grabFilmInfoFromFilmsPage(page1);
 
 
-
-
   ##  parallel format ...
   # ranks = page1 %>%
   # html_nodes(".lister-item-index") %>%
@@ -248,7 +246,6 @@ grabFilmsForPerson = function(nmid)
   # html_text();
 
   # titles;
-
 
   result;
 }
