@@ -299,6 +299,14 @@ source_url( paste0(path.github,"master/Functions/functions-project-measure.R") )
 # and so on ... 
 # measure.df = prepareMeasureData(measure);
 
+prepareMeasureData = function(myData){
+  
+  myData$my.eye[myData$eye == "\"left\"" & myData$my.eye == "r"] = "l";
+  
+  newData = myData;
+  return(newData);
+}
+
 measure.df = prepareMeasureData(measure);
 
 # set.seed(10199816)

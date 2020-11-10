@@ -48,9 +48,12 @@ Below is the code to load the data and prepare it for analysis.
 ```{r,appendix-secret,message=FALSE}
 path.project = "C:/_git_/WSU_STATS419_FALL2020/project-measure/";
 path.to.secret = "C:/Users/Alexander Nevsky/Dropbox/WSU-419/Fall 2020/__student_access__/_SECRET_/";
+
 measure.instructor = utils::read.csv( paste0(path.to.secret, "measure-students.txt"), header=TRUE, quote="", sep="|");
+
 getOne = c("hand.length", "hand.width", "hand.elbow", "elbow.armpit", "arm.reach", "foot.length", "floor.kneepit", "floor.hip", "floor.armpit");
 n.rows = nrow(measure.instructor);
+
 for(one in getOne)
   {
   measure.instructor[one] = NA;
