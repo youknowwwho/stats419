@@ -299,13 +299,19 @@ source_url( paste0(path.github,"master/Functions/functions-project-measure.R") )
 # and so on ... 
 # measure.df = prepareMeasureData(measure);
 
-prepareMeasureData = function(myData){
-  
-  myData$my.eye[myData$eye == "\"left\"" & myData$my.eye == "r"] = "l";
-  
-  newData = myData;
-  return(newData);
-}
+# prepareMeasureData2 = function(myData){
+#   
+#   newData = myData;
+#   
+#   newData$my.eye[newData$eye == "\"left\"" & newData$my.eye == "r"] = "l";
+#   
+#   return(newData);
+# }
+
+# measure.df = measure;
+# measure.df$my.eye[measure.df$eye == "\"left\"" & measure.df$my.eye == "r"] = "l";
+
+#measure$my.eye[measure$eye == "\"left\"" & measure$my.eye == "r"] = "l";
 
 measure.df = prepareMeasureData(measure);
 
