@@ -1,0 +1,48 @@
+"md5_email"|"year"|"week"|"day"|"V01"
+"06da8174757feffd764c7232f965cd7a"|2015|4|28|3.4
+"db539502caf70a3074ac646d21198f5a"|2011|16|111|3.4
+"c29e24b16f1c8c6e897b42b45dee9297"|2019|2|17|5
+"4ee5096244e139d1d87eeaa0bef29d71"|2011|21|143|1
+"15712907fc659a6714e06659256aa0a2"|2009|35|244|2.6
+"3ec0f0a866eeb8e0b419cccd6ea807b5"|2010|9|60|4.2
+"1768a550126bbf820dd89edecb92895c"|2008|29|207|2.6
+"8f2a765187594755f64c8d11bf34a3cc"|2010|10|67|3.4
+"3605e776744be0d11583305b0ede6419"|2013|40|280|4.2
+"3b87bffacdd35679a992eadf816120a2"|2010|31|216|3.4
+
+
+x = read.table(file = "clipboard", sep = "|", header=TRUE);
+
+
+sortDataFrameByNumericColumns = function (ddf, mycols, direction="DESC")
+    {
+    n.cols = length(mycols);
+    n.dirs = length(direction);
+    sdf = ddf;
+    
+    vecs = matrix(NA, nrow=dim(sdf)[1],ncol=n.cols);
+    
+    for(i in 1:n.cols)
+        {
+        idx = which( names(sdf)== mycols[i] );
+        dir = if(n.dirs==1) { direction } else { if(is.na(direction[i]) {direction} else { direction[i]}};
+        
+        if(dir == "ASC")
+            {
+            vecs[,i] = sdf[,idx];
+            } else {  
+                    # DESC
+                    vecs[,i] = -sdf[,idx];
+                    }       
+        }   
+        
+		## how I want it, doesn't work
+        #fdf = sdf[order(vecs), ];
+		## non-variadic approach, does work
+		fdf = sdf[order( vecs[,1],vecs[,2],vecs[,3] ), ];
+        
+        
+    fdf;
+    }
+	
+	

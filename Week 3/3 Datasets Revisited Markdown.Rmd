@@ -6,7 +6,7 @@ course: "Statistics 419 Survey of Multivariate Analysis"
 course-short: "STATS 419"
 instructor: "Monte J. Shaffer"
 email: "connor.starrhurst@wsu.edu"
-wsu-id: "11596221"
+
 output: 
   pdf_document:
     citation_package: natbib
