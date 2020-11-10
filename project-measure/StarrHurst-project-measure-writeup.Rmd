@@ -284,14 +284,13 @@ Below is the code to load the data and prepare it for analysis.
 
 path.to.project = "C:/Users/Connor/.ssh/stats419/project-measure/";
 
-path.to.secret = "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/
-                  Project 1 Measure/";
+path.to.secret = "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/";
 
-measure = utils::read.csv( paste0(path.to.secret, "final.measure.txt"), header=TRUE, 
+measure = utils::read.csv( paste0(path.to.secret, "cm.final.measure.txt"), header=TRUE, 
                           quote="", sep="|");
 
 path.github = "https://raw.githubusercontent.com/youknowwwho/stats419/";
-source_url( paste0(path.github,"Functions/functions-project-measure.R") );
+source_url( paste0(path.github,"master/Functions/functions-project-measure.R") );
 
 # this is your function
 # put in the same "units"
@@ -300,28 +299,30 @@ source_url( paste0(path.github,"Functions/functions-project-measure.R") );
 # and so on ... 
 # measure.df = prepareMeasureData(measure);
 
-set.seed(10199816)
+measure.df = prepareMeasureData(measure);
 
-measureExample = measure[ sample(1:nrow(measure), 22), ]; #grab 22 samples from measure
-
-measureExample$data_collector = factor(measureExample$data_collector);
-measureExample$person_id = factor(measureExample$person_id);
-measureExample$writing = factor(tolower(measureExample$writing));
-measureExample$eye = factor(tolower(measureExample$eye));
-measureExample$eye.color = factor(tolower(measureExample$eye.color));
-measureExample$ethnicity = factor(tolower(measureExample$ethnicity));
-measureExample$gender = factor(tolower(measureExample$gender));
-measureExample$gender[measureExample$gender=="f"] = "female";
-measureExample$gender[measureExample$gender=="m"] = "male";
-
-measureExample$swinging = factor(tolower(measureExample$swinging));
-#measureExample$side = factor(tolower(measureExample$side));
-
-measureExample$units = factor(tolower(measureExample$units));
-measureExample$units[measureExample$units=="inches"] = "in";
-# remember conv_units ...
-
-summary(measureExample);
+# set.seed(10199816)
+# 
+# measureExample = measure[ sample(1:nrow(measure), 22), ]; #grab 22 samples from measure
+# 
+# measureExample$data_collector = factor(measureExample$data_collector);
+# measureExample$person_id = factor(measureExample$person_id);
+# measureExample$writing = factor(tolower(measureExample$writing));
+# measureExample$eye = factor(tolower(measureExample$eye));
+# measureExample$eye.color = factor(tolower(measureExample$eye.color));
+# measureExample$ethnicity = factor(tolower(measureExample$ethnicity));
+# measureExample$gender = factor(tolower(measureExample$gender));
+# measureExample$gender[measureExample$gender=="f"] = "female";
+# measureExample$gender[measureExample$gender=="m"] = "male";
+# 
+# measureExample$swinging = factor(tolower(measureExample$swinging));
+# #measureExample$side = factor(tolower(measureExample$side));
+# 
+# measureExample$units = factor(tolower(measureExample$units));
+# measureExample$units[measureExample$units=="inches"] = "in";
+# # remember conv_units ...
+# 
+# summary(measureExample);
 ```
 
 Below is the code to generate the summary statistics and save them as a table that you see in Section \ref{}.

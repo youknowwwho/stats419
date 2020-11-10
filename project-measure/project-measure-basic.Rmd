@@ -100,6 +100,7 @@ myUnits[myUnits=="inches"] = "in";
 myUnits[myUnits=="inch"] = "in";
 myUnits[myUnits=="\"in\""] = "in";
 measure.instructor$my.units = myUnits;
+
 myEthnicity = tolower(measure.instructor$ethnicity);
 myEthnicity[myEthnicity=="white"] = "w";
 myEthnicity[myEthnicity=="caucasian"] = "w";
@@ -129,6 +130,7 @@ myEthnicity[myEthnicity=="pacific islander"] = "pi";
 myEthnicity[myEthnicity=="korean"] = "k";
 myEthnicity[myEthnicity=="indian"] = "i";
 measure.instructor$my.ethnicity = myEthnicity;
+
 myGender = tolower(measure.instructor$gender);
 myGender[myGender=="female"] = "f";
 myGender[myGender=="male"] = "m";
@@ -136,6 +138,7 @@ myGender[myGender=="\"male\""] = "m";
 myGender[myGender=="\"female\""] = "f";
 myGender[myGender=="non-binary"] = "o";
 measure.instructor$my.gender = myGender;
+
 measure = measure.instructor;
 measure$new.units = "in";
 ```
@@ -186,6 +189,7 @@ final.df = measure.df;
 final.df = subsetDataFrame(final.df, "data_collector", "!=", "411f8b5c9500b7cc928c93dd1a0006b7");
 final.df = subsetDataFrame(final.df, "person_id", "!=", "81a9f3915f64dc6edd329b89bea87d5e");
 final.df = subsetDataFrame(final.df, "person_id", "!=", "\"ee33e909372d935d190f4fcb2a92d542\"");
+
 myEye = tolower(final.df$eye);
 myEye[myEye == "both"] = "b";
 myEye[myEye == "\"both\""] = "b";
@@ -193,15 +197,17 @@ myEye[myEye == "equal"] = "b";
 myEye[myEye == "right"] = "r";
 myEye[myEye == "\"right\""] = "r";
 myEye[myEye == "left"] = "l";
-myEye[myEye == "\"left\""] = "r";
+myEye[myEye == "\"left\""] = "r"; #l?
 myEye[myEye == "brown"] = NA;
 final.df$my.eye = factor(myEye);
+
 myWriting = tolower(final.df$writing);
 myWriting[myWriting == "right"] = "r";
 myWriting[myWriting == "\"right\""] = "r";
 myWriting[myWriting == "left"] = "l";
 myWriting[myWriting == "both"] = "b";
 final.df$my.writing = factor(myWriting);
+
 mySwinging = tolower(final.df$swinging);
 mySwinging[mySwinging == "right"] = "r";
 mySwinging[mySwinging == "rigth"] = "r";
@@ -211,6 +217,7 @@ mySwinging[mySwinging == "let"] = "l";
 mySwinging[mySwinging == "leftt"] = "l";
 mySwinging[mySwinging == "both"] = "b";
 final.df$my.swinging = factor(mySwinging);
+
 myEyeColor = tolower(final.df$eye.color);
 myEyeColor[myEyeColor == "brown"] = "br";
 myEyeColor[myEyeColor == "\"brown\""] = "br";
@@ -225,6 +232,7 @@ myEyeColor[myEyeColor == "blue-grey"] = "bl-g";
 myEyeColor[myEyeColor == "grey-green"] = "gr-g";
 myEyeColor[myEyeColor == "black"] = "b";
 myEyeColor[myEyeColor == "left"] = NA;
+
 final.df$my.eye.color = factor(myEyeColor);
 final.df$my.gender = factor(final.df$my.gender);
 final.df$my.ethnicity = factor(final.df$my.ethnicity);

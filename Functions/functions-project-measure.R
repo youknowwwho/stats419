@@ -3,22 +3,22 @@ library(Hmisc);
 
 # https://texblog.org/2019/06/03/control-the-width-of-table-columns-tabular-in-latex/
 # https://tex.stackexchange.com/questions/559679/error-package-array-error-illegal-pream-toke-c-used
+
 buildLatexCorrelationTable = function(myData, 
                                       myFile = paste0(getwd(),"/","table-correlation.tex"),
                                       myLabel = "table:correlation",
                                       myCaption = "Descriptive Statistics and Correlation Analysis",
                                       myNote = "Pearson pairwise correlations are reported; \\newline a two-side test was performed to report correlation significance.",
-                                      myNames = colnames(myData),
+                                      myNames = colnames(myData), #myData needs to be a matrix of numbers
                                       round.digits = c(1,2,2),  # M, SD, corr
-                                      rotateTable=TRUE,
+                                      rotateTable = TRUE,
                                       rowDivider = TRUE,
                                       width.table = 0.99, # percent of textwidth
                                       width.names = "35mm", # width of variable names
                                       space.M.SD = "1mm",
                                       space.SD.corr = "5mm",
                                       space.between = "2mm",
-                                      showOnes = "left" # options are "center" or "left" or NULL
-)
+                                      showOnes = "left") # options are "center" or "left" or NULL
 {
   
   ################## prep data ####################
@@ -220,4 +220,11 @@ buildLatexCorrelationTable = function(myData,
   myT = "\\end{table}";
   if(rotateTable) { myT = "\\end{sidewaystable}"; }
   writeLine(myT, myFile);
+}
+
+prepareMeasureData = function(myData){
+  
+  newData = myData$my.eye[myData$eye == "\"left\"" & myData$my.eye == "r"] = "l";
+
+  return(newData);
 }

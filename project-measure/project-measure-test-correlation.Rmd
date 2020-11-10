@@ -8,7 +8,7 @@ output:
     number_sections: true
     citation_package: natbib
     latex_engine: pdflatex
-    template: ./../latex-templates/report.tex
+    template: ./../Latex Templates/report.tex
   html_document:
     df_print: paged
     
@@ -43,7 +43,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(devtools);       # required for source_url
 path.humanVerseWSU = "https://raw.githubusercontent.com/MonteShaffer/humanVerseWSU/"
 source_url( paste0(path.humanVerseWSU,"master/misc/functions-project-measure.R") );
-path.project = "C:/_git_/WSU_STATS419_FALL2020/project-measure/";
+
+path.project = "C:/Users/Connor/.ssh/stats419/project-measure/";
 path.tables = paste0(path.project,"tables/");
   createDirRecursive(path.tables);
 ```
@@ -52,15 +53,18 @@ path.tables = paste0(path.project,"tables/");
 
 ```{r,test-correlation,message=FALSE}
 file.correlation = paste0(path.tables,"tree-correlation-table.tex");
+
 myData = as.matrix(trees);  # numeric values only, only what will appear in table
+
 # https://www.overleaf.com/read/srzhrcryjpwn
 # keepaspectratio of include graphics 
 # could scale \input if still too big ...
 # https://tex.stackexchange.com/questions/13460/scalebox-knowing-how-much-it-scales#13487
+
 buildLatexCorrelationTable(myData, 
-  rotateTable = TRUE,
-  width.table = 0.60, # best for given data ... 0.95 when rotateTable = FALSE
-                      # 0.60 when rotateTable = TRUE
+  rotateTable = FALSE,
+  width.table = 0.95, # best for given data. = 0.95 when rotateTable = FALSE. 0.60 when 
+                      # rotateTable = TRUE
   myFile = file.correlation,
   myNames = c("Diameter (in)", "Height (ft)", "Volume (ft$^3$)") );
 Sys.sleep(2); # in case Knit-PDF doesn't like that I just created the file...
@@ -75,17 +79,21 @@ Sys.sleep(2); # in case Knit-PDF doesn't like that I just created the file...
 ```{r,test-correlation-2,message=FALSE}
 # build a second table, with more data ... 
 file.correlation = paste0(path.tables,"tree-correlation-table2.tex");
+
 myData = as.matrix(trees);  # numeric values only, only what will appear in table
 myData = cbind(myData,myData);
+
 # https://www.overleaf.com/read/srzhrcryjpwn
 # keepaspectratio of include graphics 
 # could scale \input if still too big ...
 # https://tex.stackexchange.com/questions/13460/scalebox-knowing-how-much-it-scales#13487
+
 buildLatexCorrelationTable(myData, 
-  rotateTable = TRUE,
-  width.table = 0.95,
+  rotateTable = FALSE,
+  width.table = 1,
   myFile = file.correlation,
-  myNames = c("Diameter (in)", "Height (ft)", "Volume (ft$^3$)", "Diameter (in)", "Height (ft)", "Volume (ft$^3$)") );
+  myNames = c("Diameter (in)", "Height (ft)", "Volume (ft$^3$)", "Diameter (in)", 
+              "Height (ft)", "Volume (ft$^3$)") );
 Sys.sleep(2); # in case Knit-PDF doesn't like that I just created the file...
 ```
 

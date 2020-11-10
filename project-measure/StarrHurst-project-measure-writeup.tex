@@ -576,14 +576,16 @@ Statistics has contributed much to data analysis.  In the future it can, and in 
 \begin{figure}[!ht]
     \begin{subfigure}[h]{0.5\textwidth}
     \centering
-    %  trim={<left> <lower> <right> <upper>}
+    % trim={<left> <lower> <right> <upper>}
     % https://shantoroy.com/latex/add-subfig-in-latex/
+    % male figure
             \includegraphics[trim = 0 0 11.25cm 0,clip,scale=1]{figures/Vitruvian.pdf}
         \caption{ \citet{Thomas:2020} discuss this. }
         \label{fig:sub-first}
     \end{subfigure}
     \begin{subfigure}[h]{0.5\textwidth}
     \centering
+    % female figure
         \includegraphics[trim = 11.25cm 0 0 0,clip,scale=1]{figures/Vitruvian.pdf}
             \caption{Schnitt realer Sensor \citep{Thomas:2020}}
         \label{fig:sub-second}
@@ -631,10 +633,11 @@ Below is the code to load the data and prepare it for analysis.
 
 \NormalTok{path.to.secret =}\StringTok{ "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/"}\NormalTok{;}
 
-\NormalTok{measure =}\StringTok{ }\NormalTok{utils}\OperatorTok{::}\KeywordTok{read.csv}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.to.secret, }\StringTok{"final.measure.txt"}\NormalTok{), }\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{quote=}\StringTok{""}\NormalTok{, }\DataTypeTok{sep=}\StringTok{"|"}\NormalTok{);}
+\NormalTok{measure =}\StringTok{ }\NormalTok{utils}\OperatorTok{::}\KeywordTok{read.csv}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.to.secret, }\StringTok{"final.measure.txt"}\NormalTok{), }\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{, }
+                          \DataTypeTok{quote=}\StringTok{""}\NormalTok{, }\DataTypeTok{sep=}\StringTok{"|"}\NormalTok{);}
 
-\CommentTok{#path.github = "https://raw.githubusercontent.com/this-IS-YOUR-PATH-TO-GITHUB/";}
-\CommentTok{#source_url( paste0(path.github,"master/functions/functions-project-measure.R") );}
+\NormalTok{path.github =}\StringTok{ "https://raw.githubusercontent.com/youknowwwho/stats419/"}\NormalTok{;}
+\KeywordTok{source_url}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.github,}\StringTok{"master/Functions/functions-project-measure.R"}\NormalTok{) );}
 
 \CommentTok{# this is your function}
 \CommentTok{# put in the same "units"}
