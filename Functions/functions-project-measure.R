@@ -224,7 +224,7 @@ buildLatexCorrelationTable = function(myData,
 
 prepareMeasureData = function(myData){
   
-  newData = myData$my.eye[myData$eye == "\"left\"" & myData$my.eye == "r"] = "l";
+  newData = ( myData$my.eye[myData$eye == "\"left\"" & myData$my.eye == "r"] = "l" );
 
   return(newData);
 }
