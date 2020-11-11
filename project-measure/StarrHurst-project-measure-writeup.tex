@@ -108,7 +108,7 @@
 \author{\Large Connor StarrHurst\vspace{0.05in} \newline\normalsize\emph{Washington State University}  }
 
 
-\date{November 09, 2020}
+\date{November 10, 2020}
 \setcounter{secnumdepth}{3}
 
 \usepackage{titlesec}
@@ -380,7 +380,7 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
     
     \hbox{\vrule height .2pt width 39.14pc}
     \vskip 5pt 
-    \hfill \textbf{\textcolor{WSU.gray}{ November 09, 2020 } }
+    \hfill \textbf{\textcolor{WSU.gray}{ November 10, 2020 } }
     \vskip 5pt 
     
 \end{abstract}
@@ -534,7 +534,7 @@ Statistics has contributed much to data analysis.  In the future it can, and in 
 
 \newpage
 
-\input{tables/example-correlation-table}
+\input{tables/correlation-table1}
 
 \newpage
 
@@ -630,129 +630,107 @@ Below is the code to load the data and prepare it for analysis.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{path.to.project =}\StringTok{ "C:/Users/Connor/.ssh/stats419/project-measure/"}\NormalTok{;}
+\NormalTok{path.to.secret =}\StringTok{ }
+\StringTok{  "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/"}\NormalTok{;}
+\NormalTok{path.to.tables =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(path.to.project,}\StringTok{"tables/"}\NormalTok{);}
+  \KeywordTok{createDirRecursive}\NormalTok{(path.to.tables);}
 
-\NormalTok{path.to.secret =}\StringTok{ "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/"}\NormalTok{;}
-
-\NormalTok{measure =}\StringTok{ }\NormalTok{utils}\OperatorTok{::}\KeywordTok{read.csv}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.to.secret, }\StringTok{"final.measure.txt"}\NormalTok{), }\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{, }
+\NormalTok{measure =}\StringTok{ }\NormalTok{utils}\OperatorTok{::}\KeywordTok{read.csv}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.to.secret, }\StringTok{"cm.final.measure.txt"}\NormalTok{), }\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{, }
                           \DataTypeTok{quote=}\StringTok{""}\NormalTok{, }\DataTypeTok{sep=}\StringTok{"|"}\NormalTok{);}
 
 \NormalTok{path.github =}\StringTok{ "https://raw.githubusercontent.com/youknowwwho/stats419/"}\NormalTok{;}
 \KeywordTok{source_url}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.github,}\StringTok{"master/Functions/functions-project-measure.R"}\NormalTok{) );}
 
-\CommentTok{# this is your function}
-\CommentTok{# put in the same "units"}
-\CommentTok{# merge left/right}
-\CommentTok{# build proportion data}
-\CommentTok{# and so on ... }
-\CommentTok{# measure.df = prepareMeasureData(measure);}
+\NormalTok{prepareMeasureData2 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(myData)\{}
+  
+\NormalTok{  newData =}\StringTok{ }\NormalTok{myData;}
+  
+\NormalTok{  newData}\OperatorTok{$}\NormalTok{my.eye[newData}\OperatorTok{$}\NormalTok{eye }\OperatorTok{==}\StringTok{ "}\CharTok{\textbackslash{}"}\StringTok{left}\CharTok{\textbackslash{}"}\StringTok{"} \OperatorTok{&}\StringTok{ }\NormalTok{newData}\OperatorTok{$}\NormalTok{my.eye }\OperatorTok{==}\StringTok{ "r"}\NormalTok{] =}\StringTok{ "l"}\NormalTok{; }
+\NormalTok{  newData}\OperatorTok{$}\NormalTok{minutes[newData}\OperatorTok{$}\NormalTok{minutes }\OperatorTok{<=}\StringTok{ }\DecValTok{0}\NormalTok{] =}\StringTok{ }\OtherTok{NA}\NormalTok{;}
+  
+  \KeywordTok{return}\NormalTok{(newData);}
+\NormalTok{\}}
 
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{10199816}\NormalTok{)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{11906189}\NormalTok{);}
 
-\NormalTok{measureExample =}\StringTok{ }\NormalTok{measure[ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(measure), }\DecValTok{22}\NormalTok{), ]; }\CommentTok{#grab 22 samples from measure}
+\NormalTok{measure.df =}\StringTok{ }\KeywordTok{prepareMeasureData2}\NormalTok{(measure);}
 
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{data_collector =}\StringTok{ }\KeywordTok{factor}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{data_collector);}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{person_id =}\StringTok{ }\KeywordTok{factor}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{person_id);}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{writing =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{writing));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{eye =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{eye));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{eye.color =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{eye.color));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{ethnicity =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{ethnicity));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{gender =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{gender));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{gender[measureExample}\OperatorTok{$}\NormalTok{gender}\OperatorTok{==}\StringTok{"f"}\NormalTok{] =}\StringTok{ "female"}\NormalTok{;}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{gender[measureExample}\OperatorTok{$}\NormalTok{gender}\OperatorTok{==}\StringTok{"m"}\NormalTok{] =}\StringTok{ "male"}\NormalTok{;}
-
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{swinging =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{swinging));}
-\CommentTok{#measureExample$side = factor(tolower(measureExample$side));}
-
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{units =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(measureExample}\OperatorTok{$}\NormalTok{units));}
-\NormalTok{measureExample}\OperatorTok{$}\NormalTok{units[measureExample}\OperatorTok{$}\NormalTok{units}\OperatorTok{==}\StringTok{"inches"}\NormalTok{] =}\StringTok{ "in"}\NormalTok{;}
+\KeywordTok{summary}\NormalTok{(measure.df);}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in `[<-.factor`(`*tmp*`, measureExample$units == "inches", value =
-## structure(c(1L, : invalid factor level, NA generated
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# remember conv_units ...}
-
-\KeywordTok{summary}\NormalTok{(measureExample);}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                           data_collector                            person_id 
-##  feaa341d33cedb0f4f7ec731c84e5ba9: 3     0ab2282a9d538094dbe633278574cec9: 1  
-##  0185c7c2eed9d48197953305a817c8b1: 2     0f91a4e5bcb75e278d54f8cca555cc4b: 1  
-##  253a0d24ddff7cbe1b9f621870d9d198: 2     2264bdbc3a7aae3cb9b76b698f187fcf: 1  
-##  5a96f81207a7a619ea2574c7e86cda93: 2     2bb88f446d3a78151df3ae67ad006e10: 1  
-##  ed892caec7a86a00ec5fbefdf5f44faf: 2     48cebdedc0acd343de4853d8e649058d: 1  
-##  00b0bc50a5d4c23ebdac6e69cebf284d: 1     628888963c3e9ac15557b4f124de3a6b: 1  
-##  (Other)                         :10     (Other)                         :16  
-##      height       head.height    head.circumference    arm.span    
-##  Min.   :33.50   Min.   :6.890   Min.   : 8.465     Min.   :31.50  
-##  1st Qu.:66.79   1st Qu.:8.563   1st Qu.:22.047     1st Qu.:67.62  
-##  Median :68.31   Median :8.804   Median :22.441     Median :70.86  
-##  Mean   :66.00   Mean   :8.720   Mean   :21.814     Mean   :67.30  
-##  3rd Qu.:70.46   3rd Qu.:9.250   3rd Qu.:23.000     3rd Qu.:72.62  
-##  Max.   :74.02   Max.   :9.843   Max.   :24.606     Max.   :87.80  
-##  NA's   :2       NA's   :2       NA's   :1          NA's   :2      
-##   floor.navel       units     writing      eye          eye.color   swinging 
-##  Min.   :37.01   cm    :18   both : 1   left : 7   blue      : 7   both : 1  
-##  1st Qu.:40.08   inches: 0   left : 2   right:13   blue-green: 1   left : 4  
-##  Median :41.25   NA's  : 4   right:19   NA's : 2   blue/green: 1   right:17  
-##  Mean   :41.26                                     brown     :10             
-##  3rd Qu.:43.21                                     green     : 1             
-##  Max.   :45.47                                     hazel     : 2             
-##  NA's   :7                                                                   
-##       age           gender      quality          minutes     
-##  Min.   : 1.00   f     : 0   Min.   : 6.000   Min.   : 3.00  
-##  1st Qu.:21.00   female:10   1st Qu.: 9.000   1st Qu.:10.00  
-##  Median :27.00   m     : 0   Median : 9.000   Median :12.00  
-##  Mean   :29.32   male  :12   Mean   : 8.795   Mean   :14.67  
-##  3rd Qu.:38.00               3rd Qu.: 9.875   3rd Qu.:18.00  
-##  Max.   :58.00               Max.   :10.000   Max.   :45.00  
-##                                               NA's   :1      
-##               ethnicity     notes            hand.length      hand.width   
-##  caucasian         : 3   Length:22          Min.   :3.750   Min.   :4.331  
-##  indian            : 1   Class :character   1st Qu.:6.693   1st Qu.:7.490  
-##  latino            : 1   Mode  :character   Median :7.382   Median :7.957  
-##  white             :15                      Mean   :7.046   Mean   :7.582  
-##  white non-hispanic: 2                      3rd Qu.:7.695   3rd Qu.:8.387  
-##                                             Max.   :8.268   Max.   :9.449  
-##                                             NA's   :2       NA's   :2      
-##    hand.elbow     elbow.armpit      arm.reach      foot.length    
-##  Min.   :15.16   Min.   : 7.874   Min.   :14.96   Min.   : 8.504  
-##  1st Qu.:16.93   1st Qu.: 9.081   1st Qu.:78.36   1st Qu.: 9.646  
-##  Median :17.35   Median :10.207   Median :85.62   Median :10.236  
-##  Mean   :17.42   Mean   :11.171   Mean   :75.94   Mean   :10.166  
-##  3rd Qu.:18.23   3rd Qu.:11.811   3rd Qu.:90.38   3rd Qu.:10.384  
-##  Max.   :19.29   Max.   :26.500   Max.   :94.49   Max.   :12.205  
-##  NA's   :4       NA's   :4        NA's   :4       NA's   :4       
-##  floor.kneepit     floor.hip      floor.armpit     my.units        
-##  Min.   :15.47   Min.   :32.28   Min.   :40.94   Length:22         
-##  1st Qu.:17.72   1st Qu.:38.15   1st Qu.:51.62   Class :character  
-##  Median :18.25   Median :39.76   Median :52.82   Mode  :character  
-##  Mean   :18.39   Mean   :39.52   Mean   :53.20                     
-##  3rd Qu.:19.24   3rd Qu.:41.03   3rd Qu.:56.69                     
-##  Max.   :20.87   Max.   :44.49   Max.   :59.06                     
-##  NA's   :4       NA's   :4       NA's   :4                         
-##  my.ethnicity        my.gender          new.units            my.eye         
-##  Length:22          Length:22          Length:22          Length:22         
+##  data_collector      person_id             height        head.height   
+##  Length:251         Length:251         Min.   : 85.09   Min.   :15.24  
+##  Class :character   Class :character   1st Qu.:160.00   1st Qu.:20.50  
+##  Mode  :character   Mode  :character   Median :168.40   Median :22.00  
+##                                        Mean   :167.25   Mean   :22.24  
+##                                        3rd Qu.:177.80   3rd Qu.:23.50  
+##                                        Max.   :191.10   Max.   :38.10  
+##                                        NA's   :9        NA's   :9      
+##  head.circumference    arm.span      floor.navel       units          
+##  Min.   :21.50      Min.   : 61.5   Min.   : 49.0   Length:251        
+##  1st Qu.:55.00      1st Qu.:158.9   1st Qu.: 95.0   Class :character  
+##  Median :56.58      Median :168.9   Median :101.0   Mode  :character  
+##  Mean   :56.08      Mean   :167.4   Mean   :101.6                     
+##  3rd Qu.:58.42      3rd Qu.:179.0   3rd Qu.:107.0                     
+##  Max.   :64.10      Max.   :224.0   Max.   :151.1                     
+##  NA's   :19         NA's   :8       NA's   :50                        
+##    writing              eye             eye.color           swinging        
+##  Length:251         Length:251         Length:251         Length:251        
 ##  Class :character   Class :character   Class :character   Class :character  
 ##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
 ##                                                                             
 ##                                                                             
 ##                                                                             
 ##                                                                             
-##   my.writing        my.swinging        my.eye.color      
-##  Length:22          Length:22          Length:22         
-##  Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character  
-##                                                          
-##                                                          
-##                                                          
+##       age           gender             quality          minutes     
+##  Min.   : 1.00   Length:251         Min.   : 5.000   Min.   : 2.00  
+##  1st Qu.:22.00   Class :character   1st Qu.: 8.000   1st Qu.:10.00  
+##  Median :27.00   Mode  :character   Median : 9.000   Median :15.00  
+##  Mean   :34.69                      Mean   : 8.616   Mean   :15.96  
+##  3rd Qu.:50.00                      3rd Qu.:10.000   3rd Qu.:20.00  
+##  Max.   :94.00                      Max.   :10.000   Max.   :45.00  
+##                                                      NA's   :21     
+##   ethnicity            notes            hand.length       hand.width   
+##  Length:251         Length:251         Min.   :  9.00   Min.   : 7.00  
+##  Class :character   Class :character   1st Qu.: 17.00   1st Qu.:18.48  
+##  Mode  :character   Mode  :character   Median : 18.00   Median :20.00  
+##                                        Mean   : 19.64   Mean   :19.69  
+##                                        3rd Qu.: 19.50   3rd Qu.:21.59  
+##                                        Max.   :223.20   Max.   :26.50  
+##                                        NA's   :13       NA's   :23     
+##    hand.elbow    elbow.armpit     arm.reach      foot.length    floor.kneepit  
+##  Min.   :23.0   Min.   :10.00   Min.   : 38.0   Min.   :13.50   Min.   :23.00  
+##  1st Qu.:40.0   1st Qu.:23.00   1st Qu.:193.0   1st Qu.:23.00   1st Qu.:42.00  
+##  Median :43.0   Median :26.00   Median :207.0   Median :24.77   Median :45.09  
+##  Mean   :42.5   Mean   :26.72   Mean   :191.6   Mean   :24.77   Mean   :45.20  
+##  3rd Qu.:45.5   3rd Qu.:29.21   3rd Qu.:221.6   3rd Qu.:26.40   3rd Qu.:48.26  
+##  Max.   :52.0   Max.   :71.00   Max.   :245.0   Max.   :38.10   Max.   :72.20  
+##  NA's   :23     NA's   :24      NA's   :24      NA's   :22      NA's   :22     
+##    floor.hip       floor.armpit     my.units         my.ethnicity      
+##  Min.   : 35.00   Min.   : 70.0   Length:251         Length:251        
+##  1st Qu.: 91.40   1st Qu.:124.5   Class :character   Class :character  
+##  Median : 96.00   Median :131.5   Mode  :character   Mode  :character  
+##  Mean   : 95.29   Mean   :131.3                                        
+##  3rd Qu.:101.00   3rd Qu.:139.7                                        
+##  Max.   :113.00   Max.   :156.8                                        
+##  NA's   :34       NA's   :22                                           
+##   my.gender          new.units            my.eye           my.writing       
+##  Length:251         Length:251         Length:251         Length:251        
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##  my.swinging        my.eye.color      
+##  Length:251         Length:251        
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
 ## 
 \end{verbatim}
 
@@ -761,54 +739,42 @@ table that you see in Section \ref{}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# measureExample2 = measureExample[, (4:8)];}
-\CommentTok{# }
-\CommentTok{# colnames(measureExample2) = c("height", "headH", "headC", "handL.l", "handL.r");}
-\CommentTok{# }
-\CommentTok{# my.M = colMeans(measureExample2); #mean}
-\CommentTok{# # my.SD =  ??? how are you going to get this data?}
-\CommentTok{# }
-\CommentTok{# my.SD = abs( rnorm(ncol(measureExample2), mean=13, sd = 1) );  # this is intentionally not correct ... you have to compute the correct SD ...}
-\CommentTok{# }
-\CommentTok{# }
-\CommentTok{# library(Hmisc);}
-\CommentTok{# }
-\CommentTok{# my.corr = rcorr( as.matrix(measureExample2), type="pearson"); #r correlations, the count for each, & p-value}
-\CommentTok{# }
-\CommentTok{# str(my.corr);}
-\CommentTok{# }
-\CommentTok{# my.corr.r = my.corr$r;}
-\CommentTok{# my.corr.pval = my.corr$P;}
-\CommentTok{# }
-\CommentTok{# # we have long variable names, we may want to create a dictionary that shortens them, and build an appendix table that is a glossary or a lookup.}
-\CommentTok{# }
-\CommentTok{# # the appendix should have the handout, the data collection process outlined, the data provenance protocol especially as it relates to SECRET, and an identification of the sample type and its potential weaknesses.}
-\CommentTok{# }
-\CommentTok{# my.corr.r.2 = round(my.corr.r,2);}
-\CommentTok{# my.corr.p.3 = as.numeric( round(my.corr.pval,3) ); # flatten}
-\CommentTok{# }
-\CommentTok{# cuts = c(0.10, 0.05, 0.01, 0.001);}
-\CommentTok{# symb = c("+", "*", "**", "***");}
-\CommentTok{# }
-\CommentTok{# my.corr.p.3.symb = "";}
-\CommentTok{# my.corr.p.3.symb[is.na(my.corr.p.3)] = "";}
-\CommentTok{# my.corr.p.3.symb[my.corr.p.3 <= 0.10] = "+";}
-\CommentTok{# my.corr.p.3.symb[my.corr.p.3 <= 0.05] = "*";}
-\CommentTok{# my.corr.p.3.symb[my.corr.p.3 <= 0.01] = "**";}
-\CommentTok{# my.corr.p.3.symb[my.corr.p.3 <= 0.001] = "***";}
-\CommentTok{# }
-\CommentTok{# my.corr.p.3.symb;}
-\CommentTok{# }
-\CommentTok{# include.diag = FALSE;  # the 1's on the diagonal are not included}
-\CommentTok{# # this is a lower triangular form ...}
-\CommentTok{# }
-\CommentTok{# char.matrix = as.character(my.corr.r.2);  }
-\CommentTok{# }
-\CommentTok{# }
-\CommentTok{# my.matrix = matrix( }
-\CommentTok{#                 paste0(char.matrix, my.corr.p.3.symb),}
-\CommentTok{#                 nrow=ncol(measureExample2));}
-\CommentTok{# my.matrix;}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{11906189}\NormalTok{);}
+
+\NormalTok{measure.df.numeric =}\StringTok{ }\NormalTok{measure.df[}\KeywordTok{sapply}\NormalTok{(measure.df, is.numeric)]; }\CommentTok{#Help From:}
+\CommentTok{#https://www.statology.org/calculate-mean-multiple-columns-in-r/#:~:text=Often%20you%20}
+\CommentTok{#may%20want%20to,using%20the%20colMeans()%20function.}
+
+\NormalTok{my.Means =}\StringTok{ }\KeywordTok{colMeans}\NormalTok{(measure.df.numeric, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{); }\CommentTok{#get mean of each column}
+\NormalTok{my.StanDevs =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(measure.df.numeric, sd, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{); }\CommentTok{#get stan dev of each column}
+
+\NormalTok{file.correlation =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(path.to.tables,}\StringTok{"correlation-table1.tex"}\NormalTok{); }\CommentTok{#save table name as}
+
+\NormalTok{myData =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(measure.df.numeric[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{5}\OperatorTok{:}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{)]);  }\CommentTok{#numeric values minus }
+\CommentTok{#head.height (2), head.circumference (3), navel.floor (5), age (6) quality (7), }
+\CommentTok{#minutes (8), and hand.width (10)}
+
+\CommentTok{# https://www.overleaf.com/read/srzhrcryjpwn}
+\CommentTok{# keepaspectratio of include graphics }
+\CommentTok{# could scale \textbackslash{}input if still too big ...}
+\CommentTok{# https://tex.stackexchange.com/questions/13460/scalebox-knowing-how-much-it-scales#13487}
+
+\KeywordTok{buildLatexCorrelationTable}\NormalTok{(myData, }
+  \DataTypeTok{rotateTable =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{width.table =} \FloatTok{.975}\NormalTok{,}
+  \DataTypeTok{width.names =} \StringTok{"35mm"}\NormalTok{,}
+  \DataTypeTok{space.M.SD =} \StringTok{".25mm"}\NormalTok{,}
+  \DataTypeTok{space.SD.corr =} \StringTok{".5mm"}\NormalTok{,}
+  \DataTypeTok{space.between =} \StringTok{".01mm"}\NormalTok{,}
+  \DataTypeTok{myFile =}\NormalTok{ file.correlation,}
+  \DataTypeTok{myNames =} \KeywordTok{c}\NormalTok{(}\StringTok{"Height (cm)"}\NormalTok{, }\StringTok{"Arm Span (cm)"}\NormalTok{, }\StringTok{"Hand Length (cm)"}\NormalTok{, }\StringTok{"Hand to Elbow (cm)"}\NormalTok{, }
+              \StringTok{"Elbow to Armpit (cm)"}\NormalTok{, }\StringTok{"Arm Reach (cm)"}\NormalTok{, }\StringTok{"Foot Length (cm)"}\NormalTok{, }
+              \StringTok{"Floor to Kneepit (cm)"}\NormalTok{, }\StringTok{"Floor to Hip (cm)"}\NormalTok{, }\StringTok{"Floor to Armpit (cm)"}\NormalTok{),}
+  \DataTypeTok{myNote =} \StringTok{"Pearson pairwise correlations are reported; }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{newline a two-side test was }
+\StringTok{  performed to report correlation significance."}\NormalTok{,}
+  \DataTypeTok{showOnes =} \StringTok{"center"}\NormalTok{);}
+
+\KeywordTok{Sys.sleep}\NormalTok{(}\DecValTok{2}\NormalTok{); }\CommentTok{# in case Knit-PDF doesn't like that I just created the file...}
 \end{Highlighting}
 \end{Shaded}
 

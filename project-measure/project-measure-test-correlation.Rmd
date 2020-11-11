@@ -90,7 +90,7 @@ myData = cbind(myData,myData);
 
 buildLatexCorrelationTable(myData, 
   rotateTable = FALSE,
-  width.table = 1,
+  width.table = 1.1, #.95 default
   myFile = file.correlation,
   myNames = c("Diameter (in)", "Height (ft)", "Volume (ft$^3$)", "Diameter (in)", 
               "Height (ft)", "Volume (ft$^3$)") );

@@ -226,7 +226,9 @@ prepareMeasureData = function(myData){
   
   newData = myData;
   
-  newData$my.eye[newData$eye == "\"left\"" & newData$my.eye == "r"] = "l";
+  newData$my.eye[newData$eye == "\"left\"" & newData$my.eye == "r"] = "l"; #fix values for the new dominant eye col (my.eye) being set to "r" instead of "l"
+  newData$minutes[newData$minutes <= 0] = NA; #fix values in minutes being huge negative numbers
+  newData$height.heads = newData$height / newData$head.height; #add a new col with number of heads per each human's height
   
   return(newData);
 }

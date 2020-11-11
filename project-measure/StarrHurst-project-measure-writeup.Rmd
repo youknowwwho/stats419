@@ -183,7 +183,7 @@ Statistics has contributed much to data analysis.  In the future it can, and in 
 
 \newpage
 
-\input{tables/example-correlation-table} 
+\input{tables/correlation-table1} 
 
 \newpage
 
@@ -283,8 +283,10 @@ Below is the code to load the data and prepare it for analysis.
 ```{r,appendix-secret,message=FALSE}
 
 path.to.project = "C:/Users/Connor/.ssh/stats419/project-measure/";
-
-path.to.secret = "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/";
+path.to.secret = 
+  "C:/Users/Connor/Documents/1) WSU 2018-/Fall 2020/Stat 419/Project 1 Measure/";
+path.to.tables = paste0(path.to.project,"tables/");
+  createDirRecursive(path.to.tables);
 
 measure = utils::read.csv( paste0(path.to.secret, "cm.final.measure.txt"), header=TRUE, 
                           quote="", sep="|");
@@ -292,104 +294,51 @@ measure = utils::read.csv( paste0(path.to.secret, "cm.final.measure.txt"), heade
 path.github = "https://raw.githubusercontent.com/youknowwwho/stats419/";
 source_url( paste0(path.github,"master/Functions/functions-project-measure.R") );
 
-# this is your function
-# put in the same "units"
-# merge left/right
-# build proportion data
-# and so on ... 
-# measure.df = prepareMeasureData(measure);
-
-# prepareMeasureData2 = function(myData){
-#   
-#   newData = myData;
-#   
-#   newData$my.eye[newData$eye == "\"left\"" & newData$my.eye == "r"] = "l";
-#   
-#   return(newData);
-# }
-
-# measure.df = measure;
-# measure.df$my.eye[measure.df$eye == "\"left\"" & measure.df$my.eye == "r"] = "l";
-
-#measure$my.eye[measure$eye == "\"left\"" & measure$my.eye == "r"] = "l";
+set.seed(11906189);
 
 measure.df = prepareMeasureData(measure);
 
-# set.seed(10199816)
-# 
-# measureExample = measure[ sample(1:nrow(measure), 22), ]; #grab 22 samples from measure
-# 
-# measureExample$data_collector = factor(measureExample$data_collector);
-# measureExample$person_id = factor(measureExample$person_id);
-# measureExample$writing = factor(tolower(measureExample$writing));
-# measureExample$eye = factor(tolower(measureExample$eye));
-# measureExample$eye.color = factor(tolower(measureExample$eye.color));
-# measureExample$ethnicity = factor(tolower(measureExample$ethnicity));
-# measureExample$gender = factor(tolower(measureExample$gender));
-# measureExample$gender[measureExample$gender=="f"] = "female";
-# measureExample$gender[measureExample$gender=="m"] = "male";
-# 
-# measureExample$swinging = factor(tolower(measureExample$swinging));
-# #measureExample$side = factor(tolower(measureExample$side));
-# 
-# measureExample$units = factor(tolower(measureExample$units));
-# measureExample$units[measureExample$units=="inches"] = "in";
-# # remember conv_units ...
-# 
-# summary(measureExample);
+summary(measure.df);
 ```
 
 Below is the code to generate the summary statistics and save them as a table that you see in Section \ref{}.
 
 ```{r,appendix-summary,message=FALSE}
 
-# measureExample2 = measureExample[, (4:8)];
-# 
-# colnames(measureExample2) = c("height", "headH", "headC", "handL.l", "handL.r");
-# 
-# my.M = colMeans(measureExample2); #mean
-# # my.SD =  ??? how are you going to get this data?
-# 
-# my.SD = abs( rnorm(ncol(measureExample2), mean=13, sd = 1) );  # this is intentionally not correct ... you have to compute the correct SD ...
-# 
-# 
-# library(Hmisc);
-# 
-# my.corr = rcorr( as.matrix(measureExample2), type="pearson"); #r correlations, the count for each, & p-value
-# 
-# str(my.corr);
-# 
-# my.corr.r = my.corr$r;
-# my.corr.pval = my.corr$P;
-# 
-# # we have long variable names, we may want to create a dictionary that shortens them, and build an appendix table that is a glossary or a lookup.
-# 
-# # the appendix should have the handout, the data collection process outlined, the data provenance protocol especially as it relates to SECRET, and an identification of the sample type and its potential weaknesses.
-# 
-# my.corr.r.2 = round(my.corr.r,2);
-# my.corr.p.3 = as.numeric( round(my.corr.pval,3) ); # flatten
-# 
-# cuts = c(0.10, 0.05, 0.01, 0.001);
-# symb = c("+", "*", "**", "***");
-# 
-# my.corr.p.3.symb = "";
-# my.corr.p.3.symb[is.na(my.corr.p.3)] = "";
-# my.corr.p.3.symb[my.corr.p.3 <= 0.10] = "+";
-# my.corr.p.3.symb[my.corr.p.3 <= 0.05] = "*";
-# my.corr.p.3.symb[my.corr.p.3 <= 0.01] = "**";
-# my.corr.p.3.symb[my.corr.p.3 <= 0.001] = "***";
-# 
-# my.corr.p.3.symb;
-# 
-# include.diag = FALSE;  # the 1's on the diagonal are not included
-# # this is a lower triangular form ...
-# 
-# char.matrix = as.character(my.corr.r.2);  
-# 
-# 
-# my.matrix = matrix( 
-#                 paste0(char.matrix, my.corr.p.3.symb),
-#                 nrow=ncol(measureExample2));
-# my.matrix;
+set.seed(11906189);
 
+measure.df.numeric = measure.df[sapply(measure.df, is.numeric)]; #Help From:
+#https://www.statology.org/calculate-mean-multiple-columns-in-r/#:~:text=Often%20you%20
+#may%20want%20to,using%20the%20colMeans()%20function.
+
+my.Means = colMeans(measure.df.numeric, na.rm = TRUE); #get mean of each column
+my.StanDevs = sapply(measure.df.numeric, sd, na.rm = TRUE); #get stan dev of each column
+
+file.correlation = paste0(path.to.tables,"correlation-table1.tex"); #save table name as
+
+myData = as.matrix(measure.df.numeric[-c(2:3,5:8,10)]);  #numeric values minus 
+#head.height (2), head.circumference (3), navel.floor (5), age (6) quality (7), 
+#minutes (8), and hand.width (10)
+
+# https://www.overleaf.com/read/srzhrcryjpwn
+# keepaspectratio of include graphics 
+# could scale \input if still too big ...
+# https://tex.stackexchange.com/questions/13460/scalebox-knowing-how-much-it-scales#13487
+
+buildLatexCorrelationTable(myData, 
+  rotateTable = TRUE,
+  width.table = .975,
+  width.names = "35mm",
+  space.M.SD = ".25mm",
+  space.SD.corr = ".5mm",
+  space.between = ".01mm",
+  myFile = file.correlation,
+  myNames = c("Height (cm)", "Arm Span (cm)", "Hand Length (cm)", "Hand to Elbow (cm)", 
+              "Elbow to Armpit (cm)", "Arm Reach (cm)", "Foot Length (cm)", 
+              "Floor to Kneepit (cm)", "Floor to Hip (cm)", "Floor to Armpit (cm)"),
+  myNote = "Pearson pairwise correlations are reported; \\newline a two-side test was 
+  performed to report correlation significance.",
+  showOnes = "center");
+
+Sys.sleep(2); # in case Knit-PDF doesn't like that I just created the file...
 ```

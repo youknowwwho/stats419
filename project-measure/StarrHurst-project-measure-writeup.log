@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.1)  9 NOV 2020 19:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.1)  10 NOV 2020 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -909,15 +909,9 @@ Overfull \hbox (6.66666pt too wide) in paragraph at lines 506--507
 [2]
 \openout4 = `StarrHurst-project-measure-writeup.ent'.
 
-[3 <./figures/conceptual-model-v4.pdf>] [4] (./tables/example-correlation-table
-.tex
-Underfull \hbox (badness 10000) in alignment at lines 26--26
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
- []
-
-
-Underfull \hbox (badness 10000) in alignment at lines 36--36
-[][] 
+[3 <./figures/conceptual-model-v4.pdf>] [4] (./tables/correlation-table1.tex
+Overfull \hbox (7.74045pt too wide) in alignment at lines 41--41
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
  []
 
 ) [5] [6
@@ -968,16 +962,16 @@ LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 621.
 [10] [11]
 
-LaTeX Warning: Reference `' on page 12 undefined on input line 760.
+LaTeX Warning: Reference `' on page 12 undefined on input line 738.
 
-[12] [13] (./StarrHurst-project-measure-writeup.ent) [14] (./StarrHurst-project
--measure-writeup.bbl) [15] (./StarrHurst-project-measure-writeup.toc)
+[12] (./StarrHurst-project-measure-writeup.ent) [13] (./StarrHurst-project-meas
+ure-writeup.bbl) [14] (./StarrHurst-project-measure-writeup.toc)
 \tf@toc=\write5
 \openout5 = `StarrHurst-project-measure-writeup.toc'.
 
 
 AED: lastpage setting LastPage
-[16] (./StarrHurst-project-measure-writeup.aux)
+[15] (./StarrHurst-project-measure-writeup.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -987,12 +981,12 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  15090 strings out of 481433
- 231720 string characters out of 5918734
- 573122 words of memory out of 5000000
+ 231692 string characters out of 5918734
+ 600080 words of memory out of 5000000
  31549 multiletter control sequences out of 15000+600000
  623322 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 79i,14n,84p,1292b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 79i,15n,84p,1292b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
 enc}{c:/Users/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
 c.enc}{c:/Users/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
@@ -1024,11 +1018,11 @@ rs/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><
 c:/Users/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10
 .pfb><c:/Users/Connor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmtti10.pfb>
-Output written on StarrHurst-project-measure-writeup.pdf (16 pages, 1085236 byt
+Output written on StarrHurst-project-measure-writeup.pdf (15 pages, 1084824 byt
 es).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 228 compressed objects within 3 object streams
+ 342 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
