@@ -282,8 +282,8 @@
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={Connor StarrHurst (Washington State University)},
-             pdfkeywords = {multiple comparisons to control; multivariate chi-square distribution;
-nonlinear growth curves; Richard's curve; simulated critical points},  
+             pdfkeywords = {multiple comparisons to control; body measurements; body proportions;
+IQR; descriptive statistics; correlation analysis;},  
             pdftitle={Height and Body Proportions of Different Ethnicities},
             colorlinks=true,
             citecolor=blue,
@@ -357,18 +357,9 @@ nonlinear growth curves; Richard's curve; simulated critical points},
 various ethnic backgrounds. We specifically hypothesized that whites are
 typically taller than \vspace{0.25in}
 
-\noindent Here is a second paragraph of the abstract (if necessary), and
-with the pipe notation it doesn't break. Notice it still needs to be
-indented. \vspace{0.25in}
 
-\noindent Generally, we write this abstract last. Often it is called the
-executive summary. It should succinctly summarize the entire document.
-You can include references such as this one to the Appendices section
-\ref{sec:appendix} if necessary.
-
-
-\vskip 8.5pt \noindent \textbf{\underline{Keywords}:} multiple comparisons to control; multivariate chi-square distribution;
-nonlinear growth curves; Richard's curve; simulated critical points \par
+\vskip 8.5pt \noindent \textbf{\underline{Keywords}:} multiple comparisons to control; body measurements; body proportions;
+IQR; descriptive statistics; correlation analysis; \par
 
     
 
@@ -406,6 +397,8 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
     \hrule
 \end{figure}
 
+\newpage
+
 \begin{figure}[!ht]
 %TwoPlot
     \hrule
@@ -417,8 +410,10 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
     \hrule
 \end{figure}
 
-\paragraph{a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White}
-\label{sec:into}
+\newpage
+
+a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k =
+Korean, w = White
 
 \section{Research Question:  Do certain ethnicities have specific body proportions?}
 \label{sec:rq}
@@ -431,12 +426,6 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
 
 \section{Data Description}
 \label{sec:data}
-
-Very brief introduction to the data, how it was collected, and so on.
-Remember that everything is covered (who, what, when, where, why, how,
-so what, and so on). Reference the section in the Appendix with greater
-detail about the data provenance. This section should be about two
-paragraphs, and the Appendix should have more information.
 
 \subsection{Summary Statistics of Data}
 \label{sec:data-summary}
@@ -467,6 +456,8 @@ paragraphs, and the Appendix should have more information.
     \label{fig:handout-1}
     \hrule
 \end{figure}
+
+\newpage
 
 \subsection{Coding the Report}
 \label{sec:appendix-setup}
@@ -506,12 +497,87 @@ Below is the code to load the data and prepare it for analysis.
 
 \NormalTok{measure.df =}\StringTok{ }\KeywordTok{prepareMeasureData}\NormalTok{(measure);}
 
-\CommentTok{#summary(measure.df);}
+\KeywordTok{summary}\NormalTok{(measure.df);}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+##  data_collector      person_id             height        head.height   
+##  Length:251         Length:251         Min.   : 85.09   Min.   :15.24  
+##  Class :character   Class :character   1st Qu.:160.00   1st Qu.:20.50  
+##  Mode  :character   Mode  :character   Median :168.40   Median :22.00  
+##                                        Mean   :167.25   Mean   :22.24  
+##                                        3rd Qu.:177.80   3rd Qu.:23.50  
+##                                        Max.   :191.10   Max.   :38.10  
+##                                        NA's   :9        NA's   :9      
+##  head.circumference    arm.span      floor.navel       units          
+##  Min.   :21.50      Min.   : 61.5   Min.   : 49.0   Length:251        
+##  1st Qu.:55.00      1st Qu.:158.9   1st Qu.: 95.0   Class :character  
+##  Median :56.58      Median :168.9   Median :101.0   Mode  :character  
+##  Mean   :56.08      Mean   :167.4   Mean   :101.6                     
+##  3rd Qu.:58.42      3rd Qu.:179.0   3rd Qu.:107.0                     
+##  Max.   :64.10      Max.   :224.0   Max.   :151.1                     
+##  NA's   :19         NA's   :8       NA's   :50                        
+##    writing              eye             eye.color           swinging        
+##  Length:251         Length:251         Length:251         Length:251        
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##       age           gender             quality          minutes     
+##  Min.   : 1.00   Length:251         Min.   : 5.000   Min.   : 2.00  
+##  1st Qu.:22.00   Class :character   1st Qu.: 8.000   1st Qu.:10.00  
+##  Median :27.00   Mode  :character   Median : 9.000   Median :15.00  
+##  Mean   :34.69                      Mean   : 8.616   Mean   :15.96  
+##  3rd Qu.:50.00                      3rd Qu.:10.000   3rd Qu.:20.00  
+##  Max.   :94.00                      Max.   :10.000   Max.   :45.00  
+##                                                      NA's   :21     
+##   ethnicity            notes            hand.length       hand.width   
+##  Length:251         Length:251         Min.   :  9.00   Min.   : 7.00  
+##  Class :character   Class :character   1st Qu.: 17.00   1st Qu.:18.48  
+##  Mode  :character   Mode  :character   Median : 18.00   Median :20.00  
+##                                        Mean   : 19.64   Mean   :19.69  
+##                                        3rd Qu.: 19.50   3rd Qu.:21.59  
+##                                        Max.   :223.20   Max.   :26.50  
+##                                        NA's   :13       NA's   :23     
+##    hand.elbow    elbow.armpit     arm.reach      foot.length    floor.kneepit  
+##  Min.   :23.0   Min.   :10.00   Min.   : 38.0   Min.   :13.50   Min.   :23.00  
+##  1st Qu.:40.0   1st Qu.:23.00   1st Qu.:193.0   1st Qu.:23.00   1st Qu.:42.00  
+##  Median :43.0   Median :26.00   Median :207.0   Median :24.77   Median :45.09  
+##  Mean   :42.5   Mean   :26.72   Mean   :191.6   Mean   :24.77   Mean   :45.20  
+##  3rd Qu.:45.5   3rd Qu.:29.21   3rd Qu.:221.6   3rd Qu.:26.40   3rd Qu.:48.26  
+##  Max.   :52.0   Max.   :71.00   Max.   :245.0   Max.   :38.10   Max.   :72.20  
+##  NA's   :23     NA's   :24      NA's   :24      NA's   :22      NA's   :22     
+##    floor.hip       floor.armpit     my.units         my.ethnicity      
+##  Min.   : 35.00   Min.   : 70.0   Length:251         Length:251        
+##  1st Qu.: 91.40   1st Qu.:124.5   Class :character   Class :character  
+##  Median : 96.00   Median :131.5   Mode  :character   Mode  :character  
+##  Mean   : 95.29   Mean   :131.3                                        
+##  3rd Qu.:101.00   3rd Qu.:139.7                                        
+##  Max.   :113.00   Max.   :156.8                                        
+##  NA's   :34       NA's   :22                                           
+##   my.gender          new.units            my.eye           my.writing       
+##  Length:251         Length:251         Length:251         Length:251        
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##  my.swinging        my.eye.color        torso.height     height.heads  
+##  Length:251         Length:251         Min.   : 21.50   Min.   :4.467  
+##  Class :character   Class :character   1st Qu.: 45.00   1st Qu.:7.130  
+##  Mode  :character   Mode  :character   Median : 50.55   Median :7.682  
+##                                        Mean   : 50.50   Mean   :7.649  
+##                                        3rd Qu.: 55.24   3rd Qu.:8.233  
+##                                        Max.   :115.00   Max.   :9.857  
+##                                        NA's   :34       NA's   :18
+\end{verbatim}
+
 \subsubsection{Plots}
-\label{sec:appendix-setup2}
+\label{sec:appendix-setup3}
 
 Below is the code to generate the plots and save them as a table that
 you see in Section \ref{sec:intro}.
@@ -527,11 +593,11 @@ you see in Section \ref{sec:intro}.
 \StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "a"} \OperatorTok{|}
 \StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "ca"} \OperatorTok{|}
 \StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "k"}\NormalTok{),];}
-\CommentTok{#a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White}
+\CommentTok{#a =Asian, b =African American, ca =Caucasion/Asian, h =Hispanic, k =Korean, w =White}
 
 \CommentTok{##### ONE GRAPHIC #####}
 \CommentTok{#https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf}
-\CommentTok{#https://www.datamentor.io/r-programming/saving-plot/}
+\CommentTok{#https://www.datamentor.io/r-programming/saving-plot/ #pdf(file="fileName.pdf")}
 
 \NormalTok{OnePlot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(measure.df.values, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{height.heads, }\DataTypeTok{y=}\NormalTok{height, }\DataTypeTok{color=}\NormalTok{my.ethnicity)) }\OperatorTok{+}
 \StringTok{  }\CommentTok{#geom_point(aes(shape=my.ethnicity, size=my.ethnicity)) +}
@@ -540,6 +606,7 @@ you see in Section \ref{sec:intro}.
 \StringTok{  }\CommentTok{#scale_size_manual(values=c(1.5,1.5,1.5,1.5,1.5,2.5)) +}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{Heads}\CharTok{\textbackslash{}"}\StringTok{ in Height"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Height"}\NormalTok{, }\DataTypeTok{color=}\StringTok{"Ethnicity"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Height and Head Proportions per Ethnicity"}\NormalTok{)}
+
 
 \CommentTok{##### TWO GRAPHIC #####}
 \NormalTok{TwoPlot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(measure.df.values, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{height, }\DataTypeTok{color=}\NormalTok{my.ethnicity)) }\OperatorTok{+}
@@ -551,7 +618,7 @@ you see in Section \ref{sec:intro}.
 \end{Shaded}
 
 \subsubsection{Summary Statistics}
-\label{sec:appendix-setup2}
+\label{sec:appendix-setup4}
 
 Below is the code to generate the summary statistics and save them as a
 table that you see in Section \ref{sec:data-summary}.

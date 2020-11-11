@@ -17,13 +17,10 @@ author:
 - name: "Connor StarrHurst"
   affiliation: "Washington State University"
 keywords: |
-    multiple comparisons to control; multivariate chi-square distribution; nonlinear growth curves; Richard's curve; simulated critical points
+    multiple comparisons to control; body measurements; body proportions; IQR; descriptive statistics; correlation analysis; 
 abstract: |
   In this article we compare the body measurements of 251 people from various ethnic backgrounds. We specifically hypothesized that whites are typically taller than  \vspace{0.25in}
 
-  \noindent Here is a second paragraph of the abstract (if necessary), and with the pipe notation it doesn't break. Notice it still needs to be indented. \vspace{0.25in}
-
-  \noindent Generally, we write this abstract last.  Often it is called the executive summary. It should succinctly summarize the entire document.  You can include references such as this one to the Appendices section \ref{sec:appendix} if necessary.
 sectionnumberdepth: 3
 titleEndnotes: "ENDNOTES"
 titleReferences: "REFERENCES"
@@ -57,6 +54,8 @@ knitr::opts_chunk$set(echo = TRUE)
 	\hrule
 \end{figure}
 
+\newpage
+
 \begin{figure}[!ht]
 %TwoPlot
 	\hrule
@@ -68,9 +67,9 @@ knitr::opts_chunk$set(echo = TRUE)
 	\hrule
 \end{figure}
 
-\paragraph{a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White}
-\label{sec:into}
+\newpage
 
+a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White
 
 
 
@@ -88,8 +87,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \section{Data Description}
 \label{sec:data}
-
-Very brief introduction to the data, how it was collected, and so on.  Remember that everything is covered (who, what, when, where, why, how, so what, and so on).  Reference the section in the Appendix with greater detail about the data provenance.  This section should be about two paragraphs, and the Appendix should have more information.
 
 \subsection{Summary Statistics of Data}
 \label{sec:data-summary}
@@ -122,6 +119,7 @@ Very brief introduction to the data, how it was collected, and so on.  Remember 
 	\hrule
 \end{figure}
 
+\newpage
 
 \subsection{Coding the Report}
 \label{sec:appendix-setup}
@@ -159,11 +157,11 @@ set.seed(11906189);
 
 measure.df = prepareMeasureData(measure);
 
-#summary(measure.df);
+summary(measure.df);
 ```
 
 \subsubsection{Plots}
-\label{sec:appendix-setup2}
+\label{sec:appendix-setup3}
 
 Below is the code to generate the plots and save them as a table that you see in Section \ref{sec:intro}.
 
@@ -178,11 +176,11 @@ measure.df.values = measure.df.values[c(measure.df.values$my.ethnicity == "w" |
                                           measure.df.values$my.ethnicity == "a" |
                                           measure.df.values$my.ethnicity == "ca" |
                                           measure.df.values$my.ethnicity == "k"),];
-#a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White
+#a =Asian, b =African American, ca =Caucasion/Asian, h =Hispanic, k =Korean, w =White
 
 ##### ONE GRAPHIC #####
 #https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf
-#https://www.datamentor.io/r-programming/saving-plot/
+#https://www.datamentor.io/r-programming/saving-plot/ #pdf(file="fileName.pdf")
 
 OnePlot = ggplot(measure.df.values, aes(x=height.heads, y=height, color=my.ethnicity)) +
   #geom_point(aes(shape=my.ethnicity, size=my.ethnicity)) +
@@ -191,6 +189,7 @@ OnePlot = ggplot(measure.df.values, aes(x=height.heads, y=height, color=my.ethni
   #scale_size_manual(values=c(1.5,1.5,1.5,1.5,1.5,2.5)) +
   labs(x="\"Heads\" in Height", y="Height", color="Ethnicity") +
   ggtitle("Height and Head Proportions per Ethnicity")
+
 
 ##### TWO GRAPHIC #####
 TwoPlot = ggplot(measure.df.values, aes(x=height, color=my.ethnicity)) +
@@ -201,7 +200,7 @@ TwoPlot = ggplot(measure.df.values, aes(x=height, color=my.ethnicity)) +
 ```
 
 \subsubsection{Summary Statistics}
-\label{sec:appendix-setup2}
+\label{sec:appendix-setup4}
 
 Below is the code to generate the summary statistics and save them as a table that you see in Section \ref{sec:data-summary}.
 
@@ -236,19 +235,4 @@ buildLatexCorrelationTable(corrData,
   showOnes = "center");
 
 Sys.sleep(2); # in case Knit-PDF doesn't like making a file...
-```
-
-```{r eval=FALSE, include=FALSE, Latex-Debug}
-#Latex Debug
-
-\begin{figure}[!ht]
-%TwoPlot
-	\hrule
-	\caption{ \textbf{IQR of Height per Ethnicity} }
-	\begin{center}
-	    \scalebox{1.00}{	\includegraphics[trim = 0 0 0 0,clip,width=\textwidth]{tables/TwoPlot.pdf} }
-	\end{center}
-	\label{fig:TwoPlot}
-	\hrule
-\end{figure}
 ```
