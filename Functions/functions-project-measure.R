@@ -1,5 +1,6 @@
 library(humanVerseWSU);
 library(Hmisc);
+library(reshape2);
 
 # https://texblog.org/2019/06/03/control-the-width-of-table-columns-tabular-in-latex/
 # https://tex.stackexchange.com/questions/559679/error-package-array-error-illegal-pream-toke-c-used

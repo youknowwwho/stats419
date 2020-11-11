@@ -100,7 +100,7 @@
 
 
 
-\title{\textbf{\textcolor{WSU.crimson}{A boring (academic) title or a clever title?}} \newline \textbf{\textcolor{WSU.gray}{A secondary title}}  }
+\title{\textbf{\textcolor{WSU.crimson}{Height and Body Proportions of Different Ethnicities}}  }
 
 %  
 
@@ -108,7 +108,7 @@
 \author{\Large Connor StarrHurst\vspace{0.05in} \newline\normalsize\emph{Washington State University}  }
 
 
-\date{November 10, 2020}
+\date{November 11, 2020}
 \setcounter{secnumdepth}{3}
 
 \usepackage{titlesec}
@@ -284,7 +284,7 @@
             pdfauthor={Connor StarrHurst (Washington State University)},
              pdfkeywords = {multiple comparisons to control; multivariate chi-square distribution;
 nonlinear growth curves; Richard's curve; simulated critical points},  
-            pdftitle={A boring (academic) title or a clever title?: A secondary title},
+            pdftitle={Height and Body Proportions of Different Ethnicities},
             colorlinks=true,
             citecolor=blue,
             urlcolor=blue,
@@ -309,7 +309,7 @@ nonlinear growth curves; Richard's curve; simulated critical points},
 
 
 \pagestyle{fancy}   
-\lhead{\textcolor{WSU.crimson}{\textbf{ A boring (academic) title or a clever title? }}}
+\lhead{\textcolor{WSU.crimson}{\textbf{ Height and Body Proportions of Different Ethnicities }}}
 \chead{}
 \rhead{\textcolor{WSU.gray}{\textbf{  Page\ \thepage\ of\ \protect\pageref{LastPage} }}}
 \lfoot{}
@@ -353,11 +353,9 @@ nonlinear growth curves; Richard's curve; simulated critical points},
 
     \vskip 8.5pt % \small 
 
-\noindent In this article we compare the \emph{empirical characteristic function}
-\citep{Tukey:1977, Becker:1988} to a
-\emph{moment-generating-functional form} to compute the proportion of
-hypotheses \(m\) that are rejected under the null hypothesis.
-\vspace{0.25in}
+\noindent In this article we compare the body measurements of 251 people from
+various ethnic backgrounds. We specifically hypothesized that whites are
+typically taller than \vspace{0.25in}
 
 \noindent Here is a second paragraph of the abstract (if necessary), and
 with the pipe notation it doesn't break. Notice it still needs to be
@@ -380,7 +378,7 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
     
     \hbox{\vrule height .2pt width 39.14pc}
     \vskip 5pt 
-    \hfill \textbf{\textcolor{WSU.gray}{ November 10, 2020 } }
+    \hfill \textbf{\textcolor{WSU.gray}{ November 11, 2020 } }
     \vskip 5pt 
     
 \end{abstract}
@@ -397,21 +395,38 @@ nonlinear growth curves; Richard's curve; simulated critical points \par
 \section{Introduction}
 \label{sec:intro}
 
-Write something here.
+\begin{figure}[!ht]
+%OnePlot
+    \hrule
+    \caption{ \textbf{Comparision of Height and Head Proportions per Ethnicity} }
+    \begin{center}
+        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=\textwidth]{tables/OnePlot.pdf} }
+    \end{center}
+    \label{fig:OnePlot}
+    \hrule
+\end{figure}
 
-{[}ONE GRAPHIC{]}
+\begin{figure}[!ht]
+%TwoPlot
+    \hrule
+    \caption{ \textbf{IQR of Height per Ethnicity} }
+    \begin{center}
+        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=\textwidth]{tables/TwoPlot.pdf} }
+    \end{center}
+    \label{fig:TwoPlot}
+    \hrule
+\end{figure}
 
-{[}TWO GRAPHICS AS ONE{]}
+\paragraph{a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White}
+\label{sec:into}
 
-Write something here.
-
-\section{Research Question:  What is my primary question}
+\section{Research Question:  Do certain ethnicities have specific body proportions?}
 \label{sec:rq}
 
-\subsection{What is my secondary question}
+\subsection{Are white, caucasion, and anglo ethnicities generally taller than asian, chinese, japanese, and korean ethnicities?}
 \label{sec:rq2}
 
-\subsection{What is my other secondary question}
+\subsection{Are white, caucasion, and anglo ethnicities generally shorter than hispanic, latin american, and asian latino ethnicities?}
 \label{sec:rq3}
 
 \section{Data Description}
@@ -423,11 +438,10 @@ so what, and so on). Reference the section in the Appendix with greater
 detail about the data provenance. This section should be about two
 paragraphs, and the Appendix should have more information.
 
-\subsection{Summary of Sample}
-\label{sec:data-sample}
-
 \subsection{Summary Statistics of Data}
 \label{sec:data-summary}
+
+\input{tables/correlation-table1}
 
 \section{Key Findings}
 \label{sec:findings}
@@ -435,117 +449,12 @@ paragraphs, and the Appendix should have more information.
 \section{Conclusion}
 \label{sec:conclusion}
 
-\newpage
-
-This was a new page
-
-This is a newline. \newline  Here is some more text.
-
-Below are some example code that may benefit you in preparing your
-document. \newline
-
-\vspace{0.25in}
-
-\noindent Please state your name: \hrulefill \newline I was born on
-\hrulefill in \hrulefill \vspace{0.25in}
-
-\begin{equation}
-\label{eq:my-model}
-    Y_{jt} = \alpha + \bm{\beta}X_{jt} + \upsilon_{j}  + \varepsilon_{jt} ,
-\end{equation}
-
-\noindent where \(\alpha\) is the grand mean, \(\upsilon_{j}\) is the
-fixed-time country mean, \(X_{jt}\) (country \(j\) at time \(t\)) is the
-matrix of country-level observations for the vector of aforementioned
-parameters \(\bm{\beta}\), and \(\varepsilon_{jt}\) represents the
-residual idiosyncratic disturbance. Our panel data set consists of
-repeated observations of countries over time. Therefore, we employ
-cross-section time-series models. This approach redefines
-Equation\textasciitilde{}\ref{eq:my-model} by subtracting time-demeaned
-values. This \emph{within} transformation subtracts constant country
-effects for the dependent variable \(\bar{Y_{j}}\), the predictor
-variables \(\bar{X_{j}}\), and the intercept \(\bar{\upsilon_{j}}\):
-
-\begin{equation}
-\label{eq:my-random}
-    (Y_{jt} - \theta \bar{Y_{j}}) = (1-\theta)\alpha + \bm{\beta}(X_{jt} - \bar{X_{j}}) +  (\upsilon_{jt} - \theta \bar{\upsilon_{j}})  ,
-\end{equation}
-
-\noindent If \(\theta = 0\), the model reduces to a basic pooled
-ordinary-least-squares (OLS) model; if \(\theta = 1\), the model reduces
-to a fixed-effects model; otherwise the model represents a
-random-effects model. The pooled OLS estimation is biased if country
-effects exist \citep{Hsiao:2003}. The random-effects model may be
-susceptible to omitted-variable bias \citep{Wooldridge:2006}: bias
-because a predictor was excluded from the model specification.
-Conversely, the fixed-effects model is not susceptible to this bias as
-it captures unobserved intracountry variation around its average
-country-level ``fixed effect." Panel-data analysis commonly has issues
-with heteroskedasticity, serial autocorrelation, and cross-sectional
-autocorrelation.
-
-\vspace{0.5in}
-
-\(i=1\) and \[i = 1\]
-
-\vspace{0.5in}
-
-\begin{tabular}{ c c c c c}
-  1 & 2 & 3 & 4 & 5 \\
-  \hline
-  6 & 7 & 8 & 9 & 10
-\end{tabular}
-
-\vspace{0.5in}
-
-\begin{figure}[!ht]
-%% figures have hrule, tables have hline
-    \hrule
-    \caption{ \textbf{Conceptual Model} }
-    \begin{center}
-        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=\textwidth]{figures/conceptual-model-v4.pdf} }
-    \end{center}
-    \label{fig:conceptual-model}
-    \hrule
-\end{figure}
-
-See Figure \ref{fig:conceptual-model}.
-
-\newpage
-
-This is a
-footnote\footnote{This is a footnote that can be really long.  \newline You can have multiple paragraphs in the footnote.  You can have \underline{underline} or \textbf{bold} or \emph{italics}.  You can even have a math equation inline. \newline In this section, we review the regression results to summarize our findings.  First, we examine each model for significance, and conclude the hypothesized models fit well with the data.  Second, we conclude that the fixed country effects represent consistent and unbiased parameter estimates.  Third, with the use of the \citet{Driscoll:1998} robust standard errors, we adjust any variance bias to ascertain the significance of these consistent estimates.  Therefore, we are able to make inferences about the hypotheses using our model estimates.  For ease of interpretation across these 12 models, we introduce $\betaSH{{ \ \ }M1}{Total}{1}$ as notation to refer to parameter estimate $\hat{\beta}_{1}$ (HDI) for the Total Sample and (M1) Model 1:  Main Effects.  We proceed by reporting findings for the total sample. \newline The footnotes are automatically converted to "endnotes" and will be included at the end of the document.  It will finish when you have that outer brace like this.}
-that can be placed within a document.
-
-\vspace{1.5in}
-
-Refer to the Appendices in section\textasciitilde{}\ref{sec:appendix}
-where I am going to cite John \citep[pp. 2-3]{Tukey:1962}.
-
-Here is a quote by \citet[pp. 2-3]{Tukey:1962}:
-
-\begin{quote}
-For a long time I have thought I was a statistician, interested in inferences from the particular to the general.  But as I have watched mathematical statistics evolve, I have had to cause to wonder and to doubt. [...] All in all, I have come to feel that my central interest is in \emph{data analysis}, which I take to include among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing the data.
-
-Large parts of data analysis are inferential in the sample-to-population sense, but these are only parts, not the whole.  Large parts of data analysis are incisive, laying bare indications which we could not perceive by simple and direct examination of the raw data, but these too are only parts, not the whole.  Some parts of data analysis, as the term is her stretch beyond its philology, are allocation, in the sense that they guide us in the distribution of effort and other valuable considerations in observation, experimentation, or analysis.  Data analysis is a larger and more varied field than inference, or incisive procedures, or allocation.
-
-Statistics has contributed much to data analysis.  In the future it can, and in my view should, contribute more.  For such contributions to exist, and be valuable, it is not necessary that they be direct.  They need not provide new techniques, or better tables for old techniques, in order to influence the practice of data analysis.
-\end{quote}
-
-\newpage
-
-\input{tables/correlation-table1}
-
-\newpage
-
-\newpage
 \section{APPENDICES}
 \label{sec:appendix}
 
 \subsection{Data Provenance}
 \label{sec:appendix-data-provenance}
 
-\newpage
 \subsubsection{Data Collection Handout}
 \label{sec:appendix-data-handout}
 
@@ -553,65 +462,17 @@ Statistics has contributed much to data analysis.  In the future it can, and in 
     \hrule
     \caption{ \textbf{Handout Page 1} }
     \begin{center}
-        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=0.85\textwidth]{pdfs/handout1.pdf} }
+        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=0.85\textwidth]{pdfs/Handout.pdf} }
     \end{center}
     \label{fig:handout-1}
     \hrule
 \end{figure}
 
-\newpage
-
-\begin{figure}[!ht]
-    \hrule
-    \caption{ \textbf{Handout Page 2} }
-    \begin{center}
-        \scalebox{1.00}{    \includegraphics[trim = 0 0 0 0,clip,width=0.85\textwidth]{pdfs/handout2.pdf} }
-    \end{center}
-    \label{fig:handout-2}
-    \hrule
-\end{figure}
-
-\newpage
-
-\begin{figure}[!ht]
-    \begin{subfigure}[h]{0.5\textwidth}
-    \centering
-    % trim={<left> <lower> <right> <upper>}
-    % https://shantoroy.com/latex/add-subfig-in-latex/
-    % male figure
-            \includegraphics[trim = 0 0 11.25cm 0,clip,scale=1]{figures/Vitruvian.pdf}
-        \caption{ \citet{Thomas:2020} discuss this. }
-        \label{fig:sub-first}
-    \end{subfigure}
-    \begin{subfigure}[h]{0.5\textwidth}
-    \centering
-    % female figure
-        \includegraphics[trim = 11.25cm 0 0 0,clip,scale=1]{figures/Vitruvian.pdf}
-            \caption{Schnitt realer Sensor \citep{Thomas:2020}}
-        \label{fig:sub-second}
-    \end{subfigure}
-    \vspace{2.5mm}
-    \hrule
-    \vspace{2.5mm}
-        \caption{\textbf{ Der Sensor in Theorie und Verwirklichung... caption at bottom instead? }  I can write a really long caption if I want. \newline This is using "crop" to include one image and trim it to appear as two.  Likely you will have two separate images if you use this option, so you would set the trim parameters all equal to 0.  \newline   This figure has subfigures which each also have a possible caption.   }
-        \label{fig:combined}
-    \vspace{-2.5mm}
-    \hrule
-\end{figure}
-
-\newpage
-
-\subsection{Preparing the Report Workspace as a subsection}
+\subsection{Coding the Report}
 \label{sec:appendix-setup}
 
-\subsubsection{Preparing the Report Workspace as a subsubsection}
+\subsubsection{Preparing the Data}
 \label{sec:appendix-setup2}
-
-\paragraph{Preparing the Report Workspace as a paragraph}
-\label{sec:appendix-setup3}
-
-\subparagraph{Preparing the Report Workspace as a subparagrah}
-\label{sec:appendix-setup4}
 
 Below is the necessary functions and libraries required to run the code
 referenced in this document.
@@ -641,140 +502,91 @@ Below is the code to load the data and prepare it for analysis.
 \NormalTok{path.github =}\StringTok{ "https://raw.githubusercontent.com/youknowwwho/stats419/"}\NormalTok{;}
 \KeywordTok{source_url}\NormalTok{( }\KeywordTok{paste0}\NormalTok{(path.github,}\StringTok{"master/Functions/functions-project-measure.R"}\NormalTok{) );}
 
-\NormalTok{prepareMeasureData2 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(myData)\{}
-  
-\NormalTok{  newData =}\StringTok{ }\NormalTok{myData;}
-  
-\NormalTok{  newData}\OperatorTok{$}\NormalTok{my.eye[newData}\OperatorTok{$}\NormalTok{eye }\OperatorTok{==}\StringTok{ "}\CharTok{\textbackslash{}"}\StringTok{left}\CharTok{\textbackslash{}"}\StringTok{"} \OperatorTok{&}\StringTok{ }\NormalTok{newData}\OperatorTok{$}\NormalTok{my.eye }\OperatorTok{==}\StringTok{ "r"}\NormalTok{] =}\StringTok{ "l"}\NormalTok{; }
-\NormalTok{  newData}\OperatorTok{$}\NormalTok{minutes[newData}\OperatorTok{$}\NormalTok{minutes }\OperatorTok{<=}\StringTok{ }\DecValTok{0}\NormalTok{] =}\StringTok{ }\OtherTok{NA}\NormalTok{;}
-  
-  \KeywordTok{return}\NormalTok{(newData);}
-\NormalTok{\}}
-
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{11906189}\NormalTok{);}
 
-\NormalTok{measure.df =}\StringTok{ }\KeywordTok{prepareMeasureData2}\NormalTok{(measure);}
+\NormalTok{measure.df =}\StringTok{ }\KeywordTok{prepareMeasureData}\NormalTok{(measure);}
 
-\KeywordTok{summary}\NormalTok{(measure.df);}
+\CommentTok{#summary(measure.df);}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##  data_collector      person_id             height        head.height   
-##  Length:251         Length:251         Min.   : 85.09   Min.   :15.24  
-##  Class :character   Class :character   1st Qu.:160.00   1st Qu.:20.50  
-##  Mode  :character   Mode  :character   Median :168.40   Median :22.00  
-##                                        Mean   :167.25   Mean   :22.24  
-##                                        3rd Qu.:177.80   3rd Qu.:23.50  
-##                                        Max.   :191.10   Max.   :38.10  
-##                                        NA's   :9        NA's   :9      
-##  head.circumference    arm.span      floor.navel       units          
-##  Min.   :21.50      Min.   : 61.5   Min.   : 49.0   Length:251        
-##  1st Qu.:55.00      1st Qu.:158.9   1st Qu.: 95.0   Class :character  
-##  Median :56.58      Median :168.9   Median :101.0   Mode  :character  
-##  Mean   :56.08      Mean   :167.4   Mean   :101.6                     
-##  3rd Qu.:58.42      3rd Qu.:179.0   3rd Qu.:107.0                     
-##  Max.   :64.10      Max.   :224.0   Max.   :151.1                     
-##  NA's   :19         NA's   :8       NA's   :50                        
-##    writing              eye             eye.color           swinging        
-##  Length:251         Length:251         Length:251         Length:251        
-##  Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                             
-##                                                                             
-##                                                                             
-##                                                                             
-##       age           gender             quality          minutes     
-##  Min.   : 1.00   Length:251         Min.   : 5.000   Min.   : 2.00  
-##  1st Qu.:22.00   Class :character   1st Qu.: 8.000   1st Qu.:10.00  
-##  Median :27.00   Mode  :character   Median : 9.000   Median :15.00  
-##  Mean   :34.69                      Mean   : 8.616   Mean   :15.96  
-##  3rd Qu.:50.00                      3rd Qu.:10.000   3rd Qu.:20.00  
-##  Max.   :94.00                      Max.   :10.000   Max.   :45.00  
-##                                                      NA's   :21     
-##   ethnicity            notes            hand.length       hand.width   
-##  Length:251         Length:251         Min.   :  9.00   Min.   : 7.00  
-##  Class :character   Class :character   1st Qu.: 17.00   1st Qu.:18.48  
-##  Mode  :character   Mode  :character   Median : 18.00   Median :20.00  
-##                                        Mean   : 19.64   Mean   :19.69  
-##                                        3rd Qu.: 19.50   3rd Qu.:21.59  
-##                                        Max.   :223.20   Max.   :26.50  
-##                                        NA's   :13       NA's   :23     
-##    hand.elbow    elbow.armpit     arm.reach      foot.length    floor.kneepit  
-##  Min.   :23.0   Min.   :10.00   Min.   : 38.0   Min.   :13.50   Min.   :23.00  
-##  1st Qu.:40.0   1st Qu.:23.00   1st Qu.:193.0   1st Qu.:23.00   1st Qu.:42.00  
-##  Median :43.0   Median :26.00   Median :207.0   Median :24.77   Median :45.09  
-##  Mean   :42.5   Mean   :26.72   Mean   :191.6   Mean   :24.77   Mean   :45.20  
-##  3rd Qu.:45.5   3rd Qu.:29.21   3rd Qu.:221.6   3rd Qu.:26.40   3rd Qu.:48.26  
-##  Max.   :52.0   Max.   :71.00   Max.   :245.0   Max.   :38.10   Max.   :72.20  
-##  NA's   :23     NA's   :24      NA's   :24      NA's   :22      NA's   :22     
-##    floor.hip       floor.armpit     my.units         my.ethnicity      
-##  Min.   : 35.00   Min.   : 70.0   Length:251         Length:251        
-##  1st Qu.: 91.40   1st Qu.:124.5   Class :character   Class :character  
-##  Median : 96.00   Median :131.5   Mode  :character   Mode  :character  
-##  Mean   : 95.29   Mean   :131.3                                        
-##  3rd Qu.:101.00   3rd Qu.:139.7                                        
-##  Max.   :113.00   Max.   :156.8                                        
-##  NA's   :34       NA's   :22                                           
-##   my.gender          new.units            my.eye           my.writing       
-##  Length:251         Length:251         Length:251         Length:251        
-##  Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                             
-##                                                                             
-##                                                                             
-##                                                                             
-##  my.swinging        my.eye.color      
-##  Length:251         Length:251        
-##  Class :character   Class :character  
-##  Mode  :character   Mode  :character  
-##                                       
-##                                       
-##                                       
-## 
-\end{verbatim}
+\subsubsection{Plots}
+\label{sec:appendix-setup2}
 
-Below is the code to generate the summary statistics and save them as a
-table that you see in Section \ref{}.
+Below is the code to generate the plots and save them as a table that
+you see in Section \ref{sec:intro}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{11906189}\NormalTok{);}
 
-\NormalTok{measure.df.numeric =}\StringTok{ }\NormalTok{measure.df[}\KeywordTok{sapply}\NormalTok{(measure.df, is.numeric)]; }\CommentTok{#Help From:}
-\CommentTok{#https://www.statology.org/calculate-mean-multiple-columns-in-r/#:~:text=Often%20you%20}
-\CommentTok{#may%20want%20to,using%20the%20colMeans()%20function.}
+\NormalTok{measure.df.values =}\StringTok{ }\NormalTok{measure.df[}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{25}\OperatorTok{:}\DecValTok{27}\NormalTok{,}\DecValTok{29}\NormalTok{,}\DecValTok{36}\NormalTok{,}\DecValTok{37}\NormalTok{)];}
+\NormalTok{measure.df.values =}\StringTok{ }\NormalTok{measure.df.values[}\KeywordTok{c}\NormalTok{(measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "w"} \OperatorTok{|}
+\StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "b"} \OperatorTok{|}
+\StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "h"} \OperatorTok{|}
+\StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "a"} \OperatorTok{|}
+\StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "ca"} \OperatorTok{|}
+\StringTok{                                          }\NormalTok{measure.df.values}\OperatorTok{$}\NormalTok{my.ethnicity }\OperatorTok{==}\StringTok{ "k"}\NormalTok{),];}
+\CommentTok{#a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White}
+
+\CommentTok{##### ONE GRAPHIC #####}
+\CommentTok{#https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf}
+\CommentTok{#https://www.datamentor.io/r-programming/saving-plot/}
+
+\NormalTok{OnePlot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(measure.df.values, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{height.heads, }\DataTypeTok{y=}\NormalTok{height, }\DataTypeTok{color=}\NormalTok{my.ethnicity)) }\OperatorTok{+}
+\StringTok{  }\CommentTok{#geom_point(aes(shape=my.ethnicity, size=my.ethnicity)) +}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\CommentTok{#scale_shape_manual(values=c(15:20)) +}
+\StringTok{  }\CommentTok{#scale_size_manual(values=c(1.5,1.5,1.5,1.5,1.5,2.5)) +}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{Heads}\CharTok{\textbackslash{}"}\StringTok{ in Height"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Height"}\NormalTok{, }\DataTypeTok{color=}\StringTok{"Ethnicity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Height and Head Proportions per Ethnicity"}\NormalTok{)}
+
+\CommentTok{##### TWO GRAPHIC #####}
+\NormalTok{TwoPlot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(measure.df.values, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{height, }\DataTypeTok{color=}\NormalTok{my.ethnicity)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"height"}\NormalTok{, }\DataTypeTok{color=}\StringTok{"Ethnicity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"IQR of Height per Ethnicity"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Summary Statistics}
+\label{sec:appendix-setup2}
+
+Below is the code to generate the summary statistics and save them as a
+table that you see in Section \ref{sec:data-summary}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{11906189}\NormalTok{);}
+
+\NormalTok{measure.df.numeric =}\StringTok{ }\NormalTok{measure.df[}\KeywordTok{sapply}\NormalTok{(measure.df, is.numeric)]; }\CommentTok{#get only numeric data}
 
 \NormalTok{my.Means =}\StringTok{ }\KeywordTok{colMeans}\NormalTok{(measure.df.numeric, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{); }\CommentTok{#get mean of each column}
 \NormalTok{my.StanDevs =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(measure.df.numeric, sd, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{); }\CommentTok{#get stan dev of each column}
 
 \NormalTok{file.correlation =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(path.to.tables,}\StringTok{"correlation-table1.tex"}\NormalTok{); }\CommentTok{#save table name as}
 
-\NormalTok{myData =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(measure.df.numeric[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{5}\OperatorTok{:}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{)]);  }\CommentTok{#numeric values minus }
-\CommentTok{#head.height (2), head.circumference (3), navel.floor (5), age (6) quality (7), }
-\CommentTok{#minutes (8), and hand.width (10)}
+\NormalTok{corrData =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(measure.df.numeric[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{15}\OperatorTok{:}\DecValTok{19}\NormalTok{)]);  }\CommentTok{#numeric values }
+\CommentTok{#but only including height, head height, navel to floor, armpit to elbow, kneepit to }
+\CommentTok{#floor, hip to floor, armpit to floor, torso height, heads in height}
 
-\CommentTok{# https://www.overleaf.com/read/srzhrcryjpwn}
-\CommentTok{# keepaspectratio of include graphics }
-\CommentTok{# could scale \textbackslash{}input if still too big ...}
-\CommentTok{# https://tex.stackexchange.com/questions/13460/scalebox-knowing-how-much-it-scales#13487}
-
-\KeywordTok{buildLatexCorrelationTable}\NormalTok{(myData, }
+\KeywordTok{buildLatexCorrelationTable}\NormalTok{(corrData, }
   \DataTypeTok{rotateTable =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{width.table =} \FloatTok{.975}\NormalTok{,}
+  \DataTypeTok{width.table =} \FloatTok{.9}\NormalTok{,}
   \DataTypeTok{width.names =} \StringTok{"35mm"}\NormalTok{,}
   \DataTypeTok{space.M.SD =} \StringTok{".25mm"}\NormalTok{,}
   \DataTypeTok{space.SD.corr =} \StringTok{".5mm"}\NormalTok{,}
   \DataTypeTok{space.between =} \StringTok{".01mm"}\NormalTok{,}
   \DataTypeTok{myFile =}\NormalTok{ file.correlation,}
-  \DataTypeTok{myNames =} \KeywordTok{c}\NormalTok{(}\StringTok{"Height (cm)"}\NormalTok{, }\StringTok{"Arm Span (cm)"}\NormalTok{, }\StringTok{"Hand Length (cm)"}\NormalTok{, }\StringTok{"Hand to Elbow (cm)"}\NormalTok{, }
-              \StringTok{"Elbow to Armpit (cm)"}\NormalTok{, }\StringTok{"Arm Reach (cm)"}\NormalTok{, }\StringTok{"Foot Length (cm)"}\NormalTok{, }
-              \StringTok{"Floor to Kneepit (cm)"}\NormalTok{, }\StringTok{"Floor to Hip (cm)"}\NormalTok{, }\StringTok{"Floor to Armpit (cm)"}\NormalTok{),}
+  \DataTypeTok{myNames =} \KeywordTok{c}\NormalTok{(}\StringTok{"Height (cm)"}\NormalTok{, }\StringTok{"Head Height (cm)"}\NormalTok{, }\StringTok{"Navel to Floor (cm)"}\NormalTok{,}
+              \StringTok{"Armpit to Elbow (cm)"}\NormalTok{, }\StringTok{"Kneepit to Floor (cm)"}\NormalTok{, }\StringTok{"Hip to Floor (cm)"}\NormalTok{, }
+              \StringTok{"Armpit to Floor (cm)"}\NormalTok{, }\StringTok{"Torso Height (cm)"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}"}\StringTok{Heads}\CharTok{\textbackslash{}"}\StringTok{ in Height"}\NormalTok{),}
   \DataTypeTok{myNote =} \StringTok{"Pearson pairwise correlations are reported; }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{newline a two-side test was }
 \StringTok{  performed to report correlation significance."}\NormalTok{,}
   \DataTypeTok{showOnes =} \StringTok{"center"}\NormalTok{);}
 
-\KeywordTok{Sys.sleep}\NormalTok{(}\DecValTok{2}\NormalTok{); }\CommentTok{# in case Knit-PDF doesn't like that I just created the file...}
+\KeywordTok{Sys.sleep}\NormalTok{(}\DecValTok{2}\NormalTok{); }\CommentTok{# in case Knit-PDF doesn't like making a file...}
 \end{Highlighting}
 \end{Shaded}
 
