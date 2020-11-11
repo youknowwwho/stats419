@@ -19,7 +19,7 @@ author:
 keywords: |
     multiple comparisons to control; body measurements; body proportions; IQR; descriptive statistics; correlation analysis; 
 abstract: |
-  In this article we compare the body measurements of 251 people from various ethnic backgrounds. We specifically hypothesized that whites are typically taller than  \vspace{0.25in}
+  In this article, we compare the body measurements of 251 people from various ethnic backgrounds. We first hypothesized that European and American ethnicities (White, Caucasian, Anglo) are typically taller than Asian ethnicities (Asian, Chinese, Korean, Japanese) and concluded that European and American ethnicities are typically taller than Asian ethnicities. We then hypothesized that European and American ethnicities (White, Caucasian, Anglo) are typically shorter than Hispanic and Latin American ethnicities (Hispanic, Latin American, Asian-Latino) and concluded that European and American ethnicities are not typically shorter than Latin American ethnicities. \vspace{0.25in}
 
 sectionnumberdepth: 3
 titleEndnotes: "ENDNOTES"
@@ -33,11 +33,6 @@ date: "`r format(Sys.time(), '%B %d, %Y')`"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
-# Sys.setenv(WSU_SANDBOX_HOST = "md5.mshaffer.com");
-# Sys.setenv(WSU_SANDBOX_DATABASE = "wsu_sandbox_db");
-# Sys.setenv(WSU_SANDBOX_USER = "wsu_sandox_user");
-# Sys.setenv(WSU_SANDBOX_PASSWD = "!WSUCougars");
 ```
 
 \section{Introduction}
@@ -69,7 +64,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \newpage
 
-a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean, w = White
+a = Asian, b = African American, ca = Caucasian/Asian, h = Hispanic, k = Korean, w = White
 
 
 
@@ -77,11 +72,11 @@ a = Asian, b = African American, ca = Caucasion/Asian, h = Hispanic, k = Korean,
 \label{sec:rq}
 
 
-\subsection{Are white, caucasion, and anglo ethnicities generally taller than asian, chinese, japanese, and korean ethnicities?}
+\subsection{Are White, Caucasian, and Anglo ethnicities generally taller than Asian, Chinese, Japanese, and Korean ethnicities?}
 \label{sec:rq2}
 
 
-\subsection{Are white, caucasion, and anglo ethnicities generally shorter than hispanic, latin american, and asian latino ethnicities?}
+\subsection{Are White, Caucasian, and Anglo ethnicities generally shorter than Hispanic, Latin American, and Asian-Latino ethnicities?}
 \label{sec:rq3}
 
 
@@ -176,7 +171,7 @@ measure.df.values = measure.df.values[c(measure.df.values$my.ethnicity == "w" |
                                           measure.df.values$my.ethnicity == "a" |
                                           measure.df.values$my.ethnicity == "ca" |
                                           measure.df.values$my.ethnicity == "k"),];
-#a =Asian, b =African American, ca =Caucasion/Asian, h =Hispanic, k =Korean, w =White
+#a =Asian, b =African American, ca =caucasian/Asian, h =Hispanic, k =Korean, w =White
 
 ##### ONE GRAPHIC #####
 #https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf

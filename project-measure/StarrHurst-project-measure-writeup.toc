@@ -1,7 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
 \contentsline {section}{\numberline {2}Research Question: Do certain ethnicities have specific body proportions?}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Are white, caucasion, and anglo ethnicities generally taller than asian, chinese, japanese, and korean ethnicities?}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Are white, caucasion, and anglo ethnicities generally shorter than hispanic, latin american, and asian latino ethnicities?}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.1}Are White, Caucasian, and Anglo ethnicities generally taller than Asian, Chinese, Japanese, and Korean ethnicities?}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Are White, Caucasian, and Anglo ethnicities generally shorter than Hispanic, Latin American, and Asian-Latino ethnicities?}{3}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Data Description}{3}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Summary Statistics of Data}{3}{subsection.3.1}%
 \contentsline {section}{\numberline {4}Key Findings}{5}{section.4}%
