@@ -307,18 +307,17 @@ Below is the code to generate the summary statistics and save them as a table th
 
 set.seed(11906189);
 
-measure.df.numeric = measure.df[sapply(measure.df, is.numeric)]; #Help From:
-#https://www.statology.org/calculate-mean-multiple-columns-in-r/#:~:text=Often%20you%20
-#may%20want%20to,using%20the%20colMeans()%20function.
+measure.df.numeric = measure.df[sapply(measure.df, is.numeric)];
 
 my.Means = colMeans(measure.df.numeric, na.rm = TRUE); #get mean of each column
 my.StanDevs = sapply(measure.df.numeric, sd, na.rm = TRUE); #get stan dev of each column
 
 file.correlation = paste0(path.to.tables,"correlation-table1.tex"); #save table name as
 
-myData = as.matrix(measure.df.numeric[-c(2:3,5:8,10)]);  #numeric values minus 
-#head.height (2), head.circumference (3), navel.floor (5), age (6) quality (7), 
-#minutes (8), and hand.width (10)
+myData = as.matrix(measure.df.numeric[c(3,4,7,22,25:27,36,37)]);  #numeric values minus 
+#but only including height(3), head height(4), navel to floor(7), armpit to elbow(22), 
+#kneepit to floor(25), hip to floor(26), armpit to floor(27), torso height(36), # of heads 
+#in height(37)
 
 # https://www.overleaf.com/read/srzhrcryjpwn
 # keepaspectratio of include graphics 
@@ -333,9 +332,9 @@ buildLatexCorrelationTable(myData,
   space.SD.corr = ".5mm",
   space.between = ".01mm",
   myFile = file.correlation,
-  myNames = c("Height (cm)", "Arm Span (cm)", "Hand Length (cm)", "Hand to Elbow (cm)", 
-              "Elbow to Armpit (cm)", "Arm Reach (cm)", "Foot Length (cm)", 
-              "Floor to Kneepit (cm)", "Floor to Hip (cm)", "Floor to Armpit (cm)"),
+  myNames = c("Height (cm)", "Head Height (cm)", "Navel to Floor (cm)",
+              "Armpit to Elbow (cm)", "Kneepit to Floor (cm)", "Hip to Floor (cm)", 
+              "Armpit to Floor (cm)", "Torso Height (cm)", "Heads"),
   myNote = "Pearson pairwise correlations are reported; \\newline a two-side test was 
   performed to report correlation significance.",
   showOnes = "center");
