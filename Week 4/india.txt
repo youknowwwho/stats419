@@ -1,0 +1,6 @@
+https://data.worldbank.org/country/india?view=chart
+
+WORLDBANK DATA ... annual, by country 
+UN may also have some data...
+
++5 to someone that can find regional population data for India (the example graphics in the subfolders are fake data).  Ideally, it would be regional and longitudinal ... population every year, or every decade (or something) by region.

@@ -1,0 +1,133 @@
+#install.packages("pracma", dependencies=T); #for dot product 
+#library(pracma)
+#install.packages("tibble", dependencies=T); #for add_column function
+#library(tibble)
+#install.packages("lubridate", dependencies=T);
+#library(lubridate)
+#install.packages("dplyr", dependencies=T);
+#library(dplyr)
+
+##### 1. ROTATE MATRIX FUNCTIONS #####
+
+transposeMatrix = function(mat) #transpose a matrix
+{
+  t(mat);
+}
+
+rotateMatrix90 = function(mat) #rotate a matrix 90 degrees clockwise
+{
+  #source: Matthew Lundberg - https://stackoverflow.com/questions/16496210/rotate-a-matrix-in-r
+  revMat = apply(mat, 2, rev); #reverse the columns (1=rows, 2=col) of the matrix
+  t(revMat); #transpose the matrix
+}
+
+rotateMatrix180 = function(mat) #rotate a matrix 180 degrees clockwise
+{
+  mat90 = rotateMatrix90(mat)
+  rotateMatrix90(mat90)
+}
+
+rotateMatrix270 = function(mat) #rotate a matrix 270 degrees clockwise
+{
+  mat180 = rotateMatrix180(mat)
+  rotateMatrix90(mat180)
+}
+
+multiply3x3Matrix = function(mat1, mat2) #matrix multiplication without doing mat1 %*% mat2
+{
+  result = matrix(nrow = 3, ncol = 3); #create empty 3x3 matrix
+  
+  for(i in seq_along(mat1[1,])) #iterate through each row of mat1
+  {
+    for(j in seq_along(mat2[,1])) #iterate through each row of mat2
+    {
+      result[i, j] = dot(mat1[i,], mat2[,j])
+    }
+  }
+  
+  result;
+}
+
+##### 1. ROTATE MATRIX CODE #####
+
+myMatrix = matrix( c(
+  1, 0, 2,
+  0, 3, 0,
+  4, 0, 5
+), nrow=3, byrow=T);
+
+yourMatrix = matrix( c(
+  1, 2, 3,
+  4, 5, 6,
+  7, 8, 9
+), nrow=3, byrow=T);
+
+myMatrix
+transposeMatrix(myMatrix);
+rotateMatrix90(myMatrix);
+rotateMatrix180(myMatrix);
+rotateMatrix270(myMatrix);
+multiply3x3Matrix(myMatrix, yourMatrix);
+#############################
+
+##### 2. IRIS GRAPHIC CODE #####
+#source: https://commons.wikimedia.org/wiki/File:Iris_dataset_scatterplot.svg
+pairs(iris[1:4], #use IRIS list data to create a matrix of scatterplots
+      main = "Iris Data (red=setosa,green=versicolor,blue=virginica)", #title
+      pch = 21, #set plot characters to be filled circles
+      bg = c("red", "green3", "blue")[unclass(iris$Species)]); #set the background/fill color of the plot characters for the unclassed list of species (1=red, 2=green3, 3=blue)
+#############################
+
+##### 4. PERSONALITY DATA #####
+data4 = read.delim("C:\\Users\\Connor\\Documents\\1) WSU 2018-\\Fall 2020\\Stat 419\\Week 2\\personality-raw.txt", header = T, sep = "|"); #import data
+nrow(data4);
+data4 = data4[c(1:2,4:63)]; #remove "V00" column
+data4 = add_column(data4, year = NA, .after = 2); #add a year column
+data4 = add_column(data4, week = NA, .after = 3); #add a week column
+
+for(i in 1:nrow(data4))
+{
+  date = data4[i,2];
+  date = strptime(date, format = "%m/%d/%Y %H:%M"); #convert date string to POSIXlt/POSIXt
+  data4[i,3] = year(date); #get the year and put it in the year column
+  data4[i,4] = week(date); #get the week and put it in the week column
+}
+
+data4 = data4[order(-data4$year, -data4$week),]; #sort the data descending by year first, then week
+#dab = unique(data4, incomparables = F, MARGIN = 1, fromLast = F) #793 & 794 are duplicates (ece0c3bd125984b3528887c1b17a83b3)
+#dab = data4 %>% distinct(data4$md5_email, .keep_all = T); 
+data4 = data4[!duplicated(data4$md5_email),] #remove duplicates
+nrow(data4);
+#(data4);
+
+head(data4);
+
+
+##### 5. DO FUNCTIONS #####
+doSummary = function(x)
+{
+  #length, number of NAs, mean, median, mode (custom), variance (custom), stan dev
+}
+
+doSampleVariance = function(x, method)
+{
+  if(method == "naive")
+  {
+    
+  }
+  else
+  {
+    #two-pass algorithm
+  }
+  #return the sum, sumSquared, and variance for naive algorithm
+  #return the sum, sumSquared, and variance for two-pass algorithm
+}
+
+doMode = function(x)
+{
+  #use the freq of data and find highest freq. Store all ties if any
+  #which.min() or which.max() return the index val of the min/max value & doesnt care about ties
+  result = c();
+  
+  result;
+}
