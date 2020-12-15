@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Research Question: Do certain ethnicities have specific body proportions?}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Are White, Caucasian, and Anglo ethnicities generally taller than Asian, Chinese, Japanese, and Korean ethnicities?}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Are White, Caucasian, and Anglo ethnicities generally shorter than Hispanic, Latin American, and Asian-Latino ethnicities?}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Data Description}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Summary Statistics of Data}{3}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Key Findings}{5}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion}{5}{section.5}%
+\contentsline {section}{\numberline {6}APPENDICES}{5}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Data Provenance}{5}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Data Collection Handout}{5}{subsubsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.2}Coding the Report}{6}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Preparing the Data}{6}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Plots}{8}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Summary Statistics}{9}{subsubsection.6.2.3}%

@@ -1,5 +1,6 @@
 library(humanVerseWSU);
 library(Hmisc);
+library(reshape2);
 
 # https://texblog.org/2019/06/03/control-the-width-of-table-columns-tabular-in-latex/
 # https://tex.stackexchange.com/questions/559679/error-package-array-error-illegal-pream-toke-c-used
@@ -228,9 +229,8 @@ prepareMeasureData = function(myData){
   
   newData$my.eye[newData$eye == "\"left\"" & newData$my.eye == "r"] = "l"; #fix values for the new dominant eye col (my.eye) being set to "r" instead of "l"
   newData$minutes[newData$minutes <= 0] = NA; #fix values in minutes being huge negative numbers
-  
-  newData$height.heads = newData$height / newData$head.height; #add a new col with number of heads per each human's height
   newData$torso.height = (newData$height - newData$head.height) - newData$floor.hip; #add a new col with height of torso (from hip to chin)
+  newData$height.heads = newData$height / newData$head.height; #add a new col with number of heads per each human's height
   
   return(newData);
 }

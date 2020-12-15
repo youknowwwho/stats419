@@ -1,0 +1,526 @@
+---
+title: 'R Notebook: Data Audit for [monte_shaffer]'
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float: true
+    toc_depth: 5
+    fig_caption: true
+    number_sections: true 
+---
+
+```{r}
+
+library(devtools);
+
+library(humanVerseWSU);
+
+path.github = "https://raw.githubusercontent.com/MonteShaffer/humanVerseWSU/master/";
+
+include.me = paste0(path.github, "misc/functions-nlp.R");
+source_url( include.me );
+include.me = paste0(path.github, "misc/functions-nlp-str.R");
+source_url( include.me );
+include.me = paste0(path.github, "misc/functions-nlp-stack.R");
+source_url( include.me );
+include.me = paste0(path.github, "misc/functions-nlp-pos.R");
+source_url( include.me );
+
+include.me = paste0(path.github, "humanVerseWSU/R/functions-encryption.R");
+source_url( include.me );
+
+
+
+
+###### UPDATES TO dataframe subset function ######
+# inflation adjustments for NA ... and improvements on subsetting
+include.me = paste0(path.github, "humanVerseWSU/R/functions-str.R");
+source_url( include.me );
+
+include.me = paste0(path.github, "humanVerseWSU/R/functions-file.R");
+source_url( include.me );
+
+include.me = paste0(path.github, "humanVerseWSU/R/functions-dataframe.R");
+source_url( include.me );
+
+include.me = paste0(path.github, "humanVerseWSU/R/functions-inflation.R");
+source_url( include.me );
+
+```
+
+# Data Audit
+
+You should place this file in your _SECRET_ local path for this course, in a subfolder called "final" ... for me that is `C:/_git_/_SECRETS_/`;  This should not go on github.
+
+
+## Set your WSU id
+```{r}
+wsu.id = "monte_shaffer"; # change this to yours.
+```
+
+### Set your path to secret
+```{r}
+path.to.secret = "C:/_git_/_SECRETS_/";
+setwd(path.to.secret);
+```
+
+### Set your XLS/TXT file
+```{r}
+# these are the files you submitted for the "project-measure" assignment.  They should be placed in your _SECRETS_ path
+file.xls = "my.measure.xlsx";  
+file.txt = "my.measure.txt";   
+
+# these are the instructor-provided files after merging the class submissions
+instructor.raw.txt = "measure-students.txt";
+instructor.clean = "final.measure.txt";
+instructor.clean.cm = "cm.final.measure.txt";
+```
+
+### Load the individual data
+
+```{r}
+library(readxl);
+covariates = read_excel( paste0(path.to.secret,file.xls) , sheet="covariates");
+panel = read_excel( paste0(path.to.secret,file.xls)  , sheet="panel");
+  covariates = as.data.frame(covariates);
+  panel = as.data.frame(panel);
+
+my.txt = read.csv( paste0(path.to.secret,file.txt) , header=TRUE, sep="|", quote="");
+
+my.class = read.csv( paste0(path.to.secret,instructor.raw.txt) , header=TRUE, sep="|", quote="");
+```
+
+### Basic Audit
+
+```{r}
+my.audit = list();
+```
+
+#### The simple names of the data collector and persons
+
+```{r}
+# In your original XLS you should have prepared a 4th tab (that you did not upload), that contains your basic user id.  For me, my name was "MonteS"
+data.collector = "MonteS";
+persons = c("MonteS","AlexanderS");  # this should be the length of the subjects/participatnts
+
+## you were supposed to make an MD5 hash of each (e.g., using md5.mshaffer.com or the humanVerse function)
+my.audit$fourth = list();
+my.audit$fourth$data.collector = data.collector;
+my.audit$fourth$persons = persons;
+my.audit$fourth$md5.data.collector = humanVerseWSU::md5(data.collector);
+my.audit$fourth$md5.persons = humanVerseWSU::md5(persons);
+```
+
+
+#### The covariates
+```{r}
+my.audit$covariates = list();
+my.audit$covariates$persons = nrow(covariates);
+my.audit$covariates$collectors = unique(covariates$data_collector);
+my.audit$covariates$persons = covariates$person_id;
+my.audit$covariates$units = covariates$units;
+```
+
+##### Explanation (1): matching keys for data collector
+
+```{r}
+my.audit$fourth$md5.data.collector;
+my.audit$covariates$collectors;
+
+(my.audit$fourth$md5.data.collector == my.audit$covariates$collectors);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+
+##### Explanation (2): matching keys for persons
+
+```{r}
+print("persons");
+my.audit$fourth$md5.persons;
+print("covariates");
+my.audit$covariates$persons
+
+print("--DIFFERENCE--");
+setdiff(my.audit$fourth$md5.persons, my.audit$covariates$persons);
+setdiff(my.audit$covariates$persons, my.audit$covariates$persons);
+```
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+#### The panel
+```{r}
+my.audit$panel = list();
+my.audit$panel$entries = nrow(panel);
+my.audit$panel$collectors = unique(panel$data_collector);
+my.audit$panel$persons = unique(panel$person_id);
+
+my.audit$panel$nas = sum( suppressWarnings( is.na(as.numeric(panel$mvalue))) );
+
+my.audit$panel$entries.per.person = my.audit$panel$entries / length( unique(panel$person_id) );
+my.audit$panel$nas.per.person = my.audit$panel$nas / length( unique(panel$person_id) );
+
+my.audit$panel$heights = subsetDataFrame(panel, "mkey", "==", "height")$mvalue;
+
+```
+
+##### Explanation (3): matching keys for data collector
+
+```{r}
+my.audit$panel$collectors;
+my.audit$covariates$collectors;
+
+(my.audit$panel$collectors == my.audit$covariates$collectors);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (4): matching keys for persons
+
+```{r}
+print("panel");
+my.audit$panel$persons;
+print("covariates");
+my.audit$covariates$persons;
+
+print("--DIFFERENCE--");
+setdiff(my.audit$panel$persons, my.audit$covariates$persons);
+setdiff(my.audit$covariates$persons, my.audit$panel$persons);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (5): entries per person
+
+```{r}
+(my.audit$panel$entries.per.person == 28);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+### XLS -> TXT Audit
+
+```{r}
+my.audit$txt = list();
+my.audit$txt$cnames = colnames(my.txt);
+my.audit$txt$entries = nrow(my.txt);
+my.audit$txt$collectors = unique(my.txt$data_collector);
+my.audit$txt$persons = unique(my.txt$person_id);
+my.audit$txt$units = my.txt$units;
+
+my.audit$txt$height = my.txt$height.NA;
+my.audit$txt$armspan = my.txt$arm.span.NA;
+my.audit$txt$ratio = my.audit$txt$height / my.audit$txt$armspan;
+
+my.txt.u = removeDuplicatesFromDataFrameAllColumns(my.txt);
+my.audit$txt.u = list();
+my.audit$txt.u$cnames = colnames(my.txt.u);
+my.audit$txt.u$entries = nrow(my.txt.u);
+my.audit$txt.u$collectors = unique(my.txt.u$data_collector);
+my.audit$txt.u$persons = unique(my.txt.u$person_id);
+my.audit$txt.u$units = my.txt.u$units;
+
+my.audit$txt.u$height = my.txt.u$height.NA;
+my.audit$txt.u$armspan = my.txt.u$arm.span.NA;
+```
+
+##### Explanation (6): duplicates
+
+```{r}
+(my.audit$txt$entries == my.audit$txt.u$entries);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (7): column-name alignment
+```{r}
+my.audit$class = list();
+my.audit$class$cnames = colnames(my.class);
+
+(my.audit$class$cnames == my.audit$txt$cnames);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (8): matching units 
+```{r}
+print("my data with duplicates removed");
+my.audit$txt.u$units;
+print("covariates");
+my.audit$covariates$units;
+
+print("--DIFFERENCE--");
+setdiff(my.audit$txt.u$units, my.audit$covariates$units);
+setdiff(my.audit$covariates$units, my.audit$txt.u$units);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (9): height-height alignment
+```{r}
+print("my data with duplicates removed");
+my.audit$txt.u$height;
+print("panel");
+my.audit$panel$heights;
+
+print("--DIFFERENCE--");
+setdiff(my.audit$txt.u$height, my.audit$panel$heights);
+setdiff(my.audit$panel$heights, my.audit$txt.u$height);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+##### Explanation (10): height-armspan ratio
+
+```{r}
+ratio.df = as.data.frame(cbind(my.audit$txt.u$height, my.audit$txt.u$armspan, (my.audit$txt.u$height/my.audit$txt.u$armspan)   ));
+  colnames(ratio.df) = c("height","armspan", "height.armspan");
+ratio.df;
+
+isClose(ratio.df$height.armspan, 1, tol = 0.1);
+```
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+
+
+```{r}
+# unique persons
+my.data.in.class = removeDuplicatesFromDataFrameAllColumns(subsetDataFrame(my.class, "person_id", "==", my.audit$txt.u$persons, logic="OR"));
+
+my.audit$data = list();
+my.audit$data$entries = nrow(my.data.in.class);
+my.audit$data$collectors = unique(my.data.in.class$data_collector);
+my.audit$data$persons = unique(my.data.in.class$person_id);
+```
+
+##### Explanation (11): matching keys for data collector
+
+```{r}
+my.audit$data$collectors;
+my.audit$covariates$collectors;
+
+(my.audit$data$collectors == my.audit$covariates$collectors);
+
+(my.audit$data$collectors == humanVerseWSU::md5(my.audit$covariates$collectors));
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+
+##### Explanation (12): additional duplicates
+
+```{r}
+my.data.in.class.n = my.data.in.class[,4:26]; # numeric fields
+
+my.audit$data.n = list();
+my.audit$data.n$entries = nrow(my.data.in.class.n);
+
+
+my.data.in.class.nu = removeDuplicatesFromDataFrameAllColumns(my.data.in.class.n);
+
+my.audit$data.nu = list();
+my.audit$data.nu$entries = nrow(my.data.in.class.nu);
+
+
+(my.audit$data.n$entries == my.audit$data.nu$entries);
+```
+
+Do the two objects above match?  If not, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+YES, they match. [no explanation required].
+</pre>
+
+
+
+### Conclusion
+
+```{r}
+# you need to upload the .rds and .html file after you KNIT ...
+saveRDS(my.audit, paste0(path.to.git.final,"dataAudit.rds") );
+```
+
+For "project-measure", the data portion was worth 50 points.  Some of you received extra points for getting data on the left/right hand for a given person.  Now, after reviewing your data inputs in detail, I would you to explain how many points you deserve for that portion of the project.  Please remember the criteria:  Mastery is perfection at 50 points; Developing is about 40 points; Nascent is about 30 points.
+
+[Some of you may still include the additional 20 points, if you feel this data audit and your efforts warrant that.  Certainly, you can offer that option with justification.]
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+I deserve XX/50 points because ...
+</pre>
+
+
+# Ethical Standards
+
+If you never had to explain yourself above, GREAT JOB!  Data provenance and being concerned about GOOD DATA is an important aspect of Data Analytics.  Even when I know I did nothing wrong, the idea that I could have made a mistake is plausible.  Hence, the need for data provenance and an audit.
+
+If you had to explain yourself a few times, that may be understandable.  It could have been a typo, a coding bug, and so on.  We are human, and it is possible to make errors throughout.  But a data audit helps us understand "why the error occurred" so we can avoid that error in the future.  
+
+Intentional "fabrication" is very different from "data errors" and that is my only concern related to this audit.  If you fabricated data, that is a serious offense.  Not only do you cheat yourself, you cheat your classmates, and you cheat the data analytics community.
+
+The ethical concerns regarding data fabrication is not new.  Many business managers do not understand what statisticians and data analysts do.  There is a saying:  "there are lies, damn lies, and statistics."  It is not good for the profession.  And, it is easy to get caught up in the "not-rat-out-a-friend" mentality.  In my estimation "to rat out" means to offer information without a request.  I am making a request, so if you know there was egregious behavior by a classmate, you then chose to also sink into their mud of lies.  
+
+Your choice.  But it has consequences to the class as a whole.  Some students put a lot of effort into this project as it could be used as a start-finish data-analytics project:  you had to collect raw data, you had to formulate your own research question, and so on.  
+
+But it is even bigger than that.  I think about "Worldcom" <https://en.wikipedia.org/wiki/WorldCom_scandal> and "Enron" <https://en.wikipedia.org/wiki/Enron_scandal> and "Arthur Anderson" <https://en.wikipedia.org/wiki/Arthur_Andersen> ... this one event changed the perception of audit accountants around the world as unethical schemers.  The brand of accountants has forever changed and federal regulations such as "Sarbanes Oxley" resulted from a few accountants that just wanted to fabricate a few numbers.  It is a slippery slope.
+
+Anyway, I feel the sentimentality analysis going negative.  I personally do not like that.  So I will stop.  Let's just ask a few questions, and move on and focus on positive things.
+
+## Did you intentionally fabricate data?  If so, why?
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+NO. [no explanation required for NO].
+</pre>
+
+## Did any of your peers in the class encourage you to intentionally fabricate data?  If yes, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+NO. [no explanation required for NO].
+</pre>
+
+## If someone made a lot of data-prepartions errors as will be discovered above, what do you feel would be a fair penalty?  Why?
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+
+## If someone intentionally fabricated data on this project, what do you feel would be a fair penalty?  Why?
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+
+## During your personal cleanup of the data for "project-measure", did you discover any anomalies?  If yes, please explain [Please include "person_id" for any data you felt was egregious].
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+
+NO. [no explanation required for NO].
+</pre>
+
+[Here, I recognize it is easier to just write NO.  I would ask that you spend a bit of time reviewing your cleanup.]
+
+# Final Standing in the Course
+
+## During the semester, did you form a group or team to work on tasks and notebooks?  Either way, please explain.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+[List your team members, describe the frequency of interaction, and give an overall appraisal of the efficacy of the team.  If you chose to work solo, please explain why.]
+
+## List any new skills you have acquired throughout the semester or existing skills you have improved upon.  For each, self-evaluate on the criteria of capability as a delta (from the beginning of the semester to now):  null, nascent, development, mastery.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+[This may be a 4-column table:  skill, pre-capability, post-capability, explanation/description.  You may just want to make it a data frame.]
+
+## Describe your progress in establishing an effective and proficient "workspace".
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+## Describe your progress in understanding the language of "data analytics."
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+
+## Overall where do you see your strength within data analytics:  data harvesting, data cleansing, data organizing, performing multivariate analyses, feature extraction, programming, graphing, communicating, and so on?  Please pick one or two and describe why you find this to be your strength.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+
+## Outline your expectations related to your final grade in this course as a function of your effort and learning throughout the semester.  Please include any unique or extenuating circumstances I need to consider as I make a final decision on your grade after reviewing your points earned.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>
+
+## Final comments you would like to share.
+
+<pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
+-- WRITE SOMETHING HERE --
+</pre>

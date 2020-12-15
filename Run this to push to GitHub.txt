@@ -1,4 +1,0 @@
-git add .
-git status
-git commit -m "what you submitting"
-git push -u origin master
