@@ -75,7 +75,7 @@ Browse to <https://github.com/MonteShaffer/WSU_STATS419_FALL2020/graphs/commit-a
 path.to.git.local = "C:/Users/Connor/.ssh/stats419/"; # C:/_git_/WSU_STATS419_FALL2020/
 setwd(path.to.git.local);
 
-path.to.git.final = paste0(path.to.git.local,"Week 15 (Final)/"); #workspaceAudit/
+path.to.git.final = paste0(path.to.git.local,"Week 15 (Final)/workspaceAudit/"); #workspaceAudit/
 ```
 
 ## General Workspace Environment Data
@@ -120,10 +120,10 @@ Take a screenshot of your gitbash tool (or if you use Github Desktop, that will 
 
 Open your git tool from the command line and browse to the correct folder ...  Type `git status` to verify you are in the right place.
 
-Now type: `git log --shortstat --pretty=format:'%h|%t|%p|%ai|%ae|%an|%ci|%ce|%cn|%N|%f|%s|%b' | paste - - - > final/git-history.log` which will create a file with your git history as a text file.  We will import and perform a basic graph.
+Now type: `git log --shortstat --pretty=format:'%h|%t|%p|%ai|%ae|%an|%ci|%ce|%cn|%N|%f|%s|%b' | paste - - - > "Week 15 (Final)/workspaceAudit/git-history.log"` which will create a file with your git history as a text file.  We will import and perform a basic graph.
 
 ```{r}
-#  git log --shortstat --pretty=format:'"%h","%an","%ae","%aD","%s",' | paste - - - > final/git-history.log
+# git log --shortstat --pretty=format:'"%h","%an","%ae","%aD","%s",' | paste - - - > final/git-history.log
 # git log --oneline --decorate > final/git-history.log
 # git log --shortstat --pretty=format:'%h|%t|%p|%ai|%ae|%an|%ci|%ce|%cn|%N|%f|%s|%b' > final/git-history.log
 ###################################################
@@ -143,8 +143,6 @@ colnames(raw.df) = c("hash","tree","parent","author.date","author.email","author
 #raw.df;
 
 total.commits = nrow(raw.df);
-
-
 
 date.strings = raw.df$commit.date;
 date.types = c("%m","%d","%W","%j","%u","%H");
@@ -233,7 +231,6 @@ for(i in 1:total.commits)
   weeks.delete[idx.week] = weeks.delete[idx.week] + n.delete;
   }
 
-
 my.git$groups = list();
 my.git$groups$hours = list("hours" = hours, "file" = hours.file, "insert" = hours.insert, "delete" = hours.delete);
 my.git$groups$days = list("days" = days, "file" = days.file, "insert" = days.insert, "delete" = days.delete);
@@ -243,7 +240,6 @@ my.object$git = my.git;
 plot(hours, hours.file,   bty="n", type="l");  # 0 is midnight
 plot(hours, hours.insert, bty="n", type="l");
 plot(hours, hours.delete, bty="n", type="l");
-
 
 plot(days, days.file,   bty="n", type="l");    # 1 is Monday
 plot(days, days.insert, bty="n", type="l");
@@ -255,7 +251,6 @@ plot(weeks, weeks.delete, bty="n", type="l");
 
 ###############################################
 ### Feel free to improve on the graphics, if you desire, totally optional ...
-
 ```
 
 ## Conclusive Summary
@@ -265,12 +260,12 @@ plot(weeks, weeks.delete, bty="n", type="l");
 saveRDS(my.object, paste0(path.to.git.final,"workspaceAudit.rds") );
 ```
 
-This audit is worth 50 points.  Based on your activity in the workspace, self-assess how many points you merit.  Mastery is perfection at 50 points; Developing is about 40 points; Nascent is about 30 points.  Justify your decision based on the consistency of your use of the tools and workspace throughout the semester.
+This audit is worth 50 points. Based on your activity in the workspace, self-assess how many points you merit. Mastery is perfection at 50 points; Developing is about 40 points; Nascent is about 30 points.  Justify your decision based on the consistency of your use of the tools and workspace throughout the semester.
 
 Be certain to review the graphs and include self-reflective commentary on your work habits: day of week, hour of day, and so on.
 
 <pre style="font-weight: bold; font-family: monospace; white-space: pre-wrap; background-color: #717171; border: 2px solid #981e32;">
 -- WRITE SOMETHING HERE --
 
-I deserve XX/50 points because ...
+I deserve 50/50 points because I have installed R, RStudio, Latex, various packages, Git Bash and I feel I'm able to use these programs well. All my work is on Github and updated with the current class work. I also have Dropbox basic installed (see screenshots above). After viewing the above graphs I noticed most of my activity is in the middle and later weeks, later in the day (makes sense since I do most of my work after lunch), and weeks of the year is mostly uniform.
 </pre>

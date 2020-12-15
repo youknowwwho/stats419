@@ -1,3 +1,7 @@
+Repository: youknowwwho/stats419
+
+cd C:/Users/Connor/.ssh/stats419
+
 git add .
 git status
 git commit -m "what you submitting"
